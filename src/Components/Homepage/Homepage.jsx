@@ -4,12 +4,12 @@ import Navbar from '../Navbar/Navbar'; // Import the Navbar component
 
 const Homepage = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col relative"> {/* Added relative positioning to the parent div */}
       {/* Navbar Component */}
       <Navbar />
 
       {/* Hero Section */}
-      <div className="flex-grow flex flex-col justify-center items-center bg-gradient-to-r from-blue-600 to-purple-700 p-6 md:p-8 text-center text-white mt-16">
+      <div className="flex-grow flex flex-col justify-center items-center bg-gradient-to-r from-blue-600 to-purple-700 p-6 md:p-8 text-center text-white mt-16 z-10"> {/* Ensure z-10 on Hero Section */}
         <h1 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6">
           Transforming Ideas into <span className="text-yellow-300">Digital Masterpieces</span>
         </h1>
@@ -27,7 +27,7 @@ const Homepage = () => {
       </div>
 
       {/* Services Section */}
-      <div className="bg-gray-100 py-8 md:py-12 mt-16">
+      <div className="bg-gray-100 py-8 md:py-12 mt-16 z-0"> {/* z-index set to 0 for services */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-2xl md:text-3xl font-bold text-center mb-6 md:mb-8">Our Expertise</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
