@@ -1,1 +1,48 @@
 @import "tailwindcss";
+
+/* Dark Mode */
+.dark-mode {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+.dark-mode nav {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+.dark-mode a {
+  color: #ffffff;
+}
+
+.dark-mode a:hover {
+  color: blue;
+}
+
+/* Light Mode */
+.light-mode {
+  background-color: #ffffff;
+  color: #1a1a1a;
+}
+
+.light-mode nav {
+  background-color: #ffffff;
+  color: #1a1a1a;
+}
+
+.light-mode a {
+  color: #1a1a1a;
+}
+
+.light-mode a:hover {
+  color: blue;
+}
+
+/* Smooth Transitions */
+html {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+nav, a, button {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
