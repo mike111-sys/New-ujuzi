@@ -196,7 +196,7 @@ const Navbar = () => {
         <div
           className={`text-center text-lg font-bold ${
             isDarkMode ? "text-white" : "text-gray-800"
-          } mb-4 pb-2 border-b-4 ${
+          } mb-2 pb-2 border-b-4 ${
             isDarkMode ? "border-white" : "border-gray-800"
           } border-double transition-colors duration-300`}
         >
@@ -258,7 +258,7 @@ const Navbar = () => {
               className="bg-blue-500 text-white text-sm px-4 py-2 rounded hover:bg-blue-600 cursor-pointer transition-colors duration-300"
               onClick={closeMenu}
             >
-              Request A Quote
+              Message Us
             </button>
           </li>
           {/* Theme Toggle with Moon and Sun Icons */}
@@ -296,7 +296,7 @@ const Navbar = () => {
         </ul>
 
         {/* Social Media Icons */}
-        <div className="absolute bottom-6 left-0 w-full flex justify-center space-x-6">
+        <div className="absolute bottom-2 left-0 w-full flex justify-center space-x-6">
           {[
             { icon: FaFacebookF, color: "blue-400", link: "https://www.facebook.com" },
             { icon: FaWhatsapp, color: "green-400", link: "https://wa.me/yourwhatsapplink" },
