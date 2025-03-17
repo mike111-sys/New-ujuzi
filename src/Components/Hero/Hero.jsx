@@ -56,9 +56,9 @@ const Hero = () => {
 
   return (
     <div className="w-full min-h-screen flex flex-col font-poppins">
-      {/* Text Section */}
+      {/* Desktop View */}
       <div
-        className={`w-full flex flex-col items-center justify-center mt-16 py-8 text-center transition-colors duration-300 ${
+        className={`hidden md:flex flex-col items-center justify-center mt-16 py-8 max-h-[220px] text-center transition-colors duration-300 ${
           isDarkMode 
             ? "bg-gradient-to-r from-gray-900 to-gray-800 text-white" 
             : "bg-gradient-to-r from-blue-50 to-white text-gray-900"
@@ -66,37 +66,74 @@ const Hero = () => {
       >
         <AnimatePresence mode="wait">
           <motion.h1
-            key={currentSlide}
+            key={`desktop-title-${currentSlide}`}
             initial={{ scale: 1.2, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ duration: 0.8, ease: "easeInOut"}}
-            className="text-xl md:text-3xl font-extrabold tracking-wide"
+            className="text-3xl font-extrabold tracking-wide"
           >
             {slides[currentSlide].text}
           </motion.h1>
         </AnimatePresence>
 
         <motion.p
-          key={`desc-${currentSlide}`}
+          key={`desktop-desc-${currentSlide}`}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
           transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
-          className="mt-1 text-sm md:text-lg font-light max-w-2xl"
+          className="mt-1 text-lg font-light max-w-2xl"
         >
           {slides[currentSlide].description}
         </motion.p>
       </div>
 
-      {/* Image Section */}
-      <div className="w-full flex justify-center overflow-hidden">
+      {/* Mobile View */}
+      <div
+        className={`md:hidden flex flex-col items-center justify-center mt-16 py-8 max-h-[220px] text-center transition-colors duration-300 ${
+          isDarkMode 
+            ? "bg-gradient-to-r from-gray-900 to-gray-800 text-white" 
+            : "bg-gradient-to-r from-blue-50 to-white text-gray-900"
+        }`}
+      >
+       <AnimatePresence mode="wait">
+  <motion.h1
+    key={`mobile-title-${currentSlide}`}
+    initial={{ y: -50, opacity: 0, scale: 0.8 }}
+    animate={{ y: 0, opacity: 1, scale: 1 }}
+    exit={{ y: 50, opacity: 0, scale: 1.1 }}
+    transition={{
+      duration: 0.8,
+      ease: [0.6, -0.05, 0.01, 0.99], // Smooth easing curve
+    }}
+    className="text-xl font-extrabold tracking-wide"
+  >
+    {slides[currentSlide].text}
+  </motion.h1>
+</AnimatePresence>
+
+
+        <motion.p
+          key={`mobile-desc-${currentSlide}`}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
+          className="mt-1 text-sm font-light max-w-2xl"
+        >
+          {slides[currentSlide].description}
+        </motion.p>
+      </div>
+
+      {/* Desktop Image Section */}
+      <div className="hidden md:flex w-full justify-center overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.img
-            key={slides[currentSlide].image}
+            key={`desktop-image-${currentSlide}`}
             src={slides[currentSlide].image}
             alt="Slide"
-            className="w-full h-[350px] md:h-[500px] object-cover rounded-lg shadow-lg"
+            className="w-full h-[500px] object-cover rounded-lg shadow-lg"
             initial={{ scale: 1.2, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
@@ -105,19 +142,35 @@ const Hero = () => {
         </AnimatePresence>
       </div>
 
-      {/* Large Screen View (Only visible on screens larger than mobile) */}
-      <div className="hidden md:flex flex-col items-center justify-center py-12">
-        <p className="text-xl font-semibold text-gray-700 dark:text-gray-300">
-          Experience seamless digital growth with our expert services!
-        </p>
+      {/* Mobile Image Section */}
+      <div className="md:hidden flex w-full justify-center overflow-hidden">
+        <AnimatePresence mode="wait">
+          <motion.img
+            key={`mobile-image-${currentSlide}`}
+            src={slides[currentSlide].image}
+            alt="Slide"
+            className="w-full h-[350px] object-cover rounded-lg shadow-lg"
+            initial={{ scale: 1.2, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+          />
+        </AnimatePresence>
       </div>
 
-      {/* Mobile Screen View (Only visible on small screens) */}
-      <div className="md:hidden flex flex-col items-center justify-center py-6 px-4">
-        <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
-          Let’s take your brand to the next level. 🚀
-        </p>
-      </div>
+      <div className="hidden md:flex flex-col items-center justify-center py-12">
+<p className="text-xl font-semibold text-gray-700 dark:text-gray-300">
+  Experience seamless digital growth with our expert services!
+</p>
+</div>
+
+{/* Mobile Screen View (Only visible on small screens) */}
+<div className="md:hidden flex flex-col items-center justify-center py-6 px-4">
+<p className="text-lg mt-3 text-gray-600 dark:text-gray-400 text-center">
+  Let’s take your brand to the next level. 
+</p>
+</div>
+
     </div>
   );
 };
