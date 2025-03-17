@@ -75,7 +75,7 @@ const Footer = () => {
           </div>
           <div className="flex items-center justify-center md:justify-start space-x-2">
             <FaEnvelope className="text-yellow-400" />
-            <p className={textColor}>info@ujuzidigital.com</p>
+            <p className={textColor}>ujuzicreations@gmail.com</p>
           </div>
         </motion.div>
 

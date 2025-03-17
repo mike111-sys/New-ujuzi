@@ -12,6 +12,13 @@ const slides = [
     image: web 
   },
   { 
+    text: "📈 Smart Digital Marketing Strategies", 
+    description: "SEO, social media, and paid ads – we help you dominate the digital space and grow your brand.", 
+    image: marketing 
+  },
+
+
+  { 
     text: "🎬 Create Stunning Video Content", 
     description: "We craft engaging videos that bring your brand story to life and connect with your audience.", 
     image: video 
@@ -20,13 +27,13 @@ const slides = [
     text: "🎨 Graphic Designs That Speak", 
     description: "From logos to marketing materials, our creative designs make your brand unforgettable.", 
     image: graphic 
-  },
-  { 
-    text: "📈 Smart Digital Marketing Strategies", 
-    description: "SEO, social media, and paid ads – we help you dominate the digital space and grow your brand.", 
-    image: marketing 
   }
+  
 ];
+
+const buttonColor = 
+    'bg-yellow-500 hover:bg-yellow-400 text-gray-900'
+  
 
 const Hero = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -166,9 +173,22 @@ const Hero = () => {
 
 {/* Mobile Screen View (Only visible on small screens) */}
 <div className="md:hidden flex flex-col items-center justify-center py-6 px-4">
-<p className="text-lg mt-3 text-gray-600 dark:text-gray-400 text-center">
-  Let’s take your brand to the next level. 
-</p>
+<motion.button
+            className={`mt-1 px-6 py-3 rounded-full font-semibold text-lg transition-transform transform hover:scale-105 shadow-lg ${buttonColor}`}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+
+           
+            src={slides[currentSlide].image}
+            alt="Slide"
+            initial={{ scale: 1.2, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.8, opacity: 0 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+
+          >
+            Request a Quote
+          </motion.button>
 </div>
 
     </div>
