@@ -56,9 +56,9 @@ const Hero = () => {
 
   return (
     <div className="w-full min-h-screen flex flex-col font-poppins">
-      {/* Text Section with Animation */}
+      {/* Text Section */}
       <div
-        className={`w-full flex flex-col items-center justify-center mt-16 py-8 max-h-[220px] text-center transition-colors duration-300 ${
+        className={`w-full flex flex-col items-center justify-center mt-16 py-8 text-center transition-colors duration-300 ${
           isDarkMode 
             ? "bg-gradient-to-r from-gray-900 to-gray-800 text-white" 
             : "bg-gradient-to-r from-blue-50 to-white text-gray-900"
@@ -89,7 +89,7 @@ const Hero = () => {
         </motion.p>
       </div>
 
-      {/* Image Section with Animation */}
+      {/* Image Section */}
       <div className="w-full flex justify-center overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.img
@@ -103,6 +103,20 @@ const Hero = () => {
             transition={{ duration: 0.8, ease: "easeInOut" }}
           />
         </AnimatePresence>
+      </div>
+
+      {/* Large Screen View (Only visible on screens larger than mobile) */}
+      <div className="hidden md:flex flex-col items-center justify-center py-12">
+        <p className="text-xl font-semibold text-gray-700 dark:text-gray-300">
+          Experience seamless digital growth with our expert services!
+        </p>
+      </div>
+
+      {/* Mobile Screen View (Only visible on small screens) */}
+      <div className="md:hidden flex flex-col items-center justify-center py-6 px-4">
+        <p className="text-sm text-gray-600 dark:text-gray-400 text-center">
+          Let’s take your brand to the next level. 🚀
+        </p>
       </div>
     </div>
   );
