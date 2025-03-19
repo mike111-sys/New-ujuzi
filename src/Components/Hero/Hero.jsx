@@ -166,7 +166,7 @@ const Hero = () => {
       </div>
 
       <div className="hidden md:flex flex-col items-center justify-center py-12">
-<p className="text-xl font-semibold text-gray-700 dark:text-gray-300">
+<p className="text-xl font-semibold">
   Experience seamless digital growth with our expert services!
 </p>
 </div>
@@ -188,9 +188,8 @@ const Hero = () => {
 
           >
             Request a Quote
-          </motion.button>
+          </motion.button>      
 </div>
-
     </div>
   );
 };

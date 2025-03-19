@@ -3,6 +3,10 @@ import Navbar from './Components/Navbar/Navbar';
 import Hero from './Components/Hero/Hero';
 import Homepage from './Components/Homepage/Homepage';
 import Footer from './Components/Footer/Footer';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import About from './Components/About/About';
+import Services from './Components/Services/Services';
+import WhyChooseUs from './Components/WhyChooseUs/WhyChooseUs';
 
 const App = () => {
   // Get dark mode preference from localStorage or default to true
@@ -35,12 +39,30 @@ const App = () => {
       </button>
 
       {/* Page Components */}
-      <Navbar />
-      <Hero />
-      <Homepage />
-      <Footer />
+      <Router>
+        <Navbar />
+        <Routes>
+          {/* Home Route */}
+          <Route
+            path="/"
+            element={
+              <>
+                <Hero />
+                <Homepage />
+              </>
+            }
+          />
+          {/* About Route */}
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/why-choose-us" element={<WhyChooseUs />} />
+
+          <Route path="/why-us" element={<WhyChooseUs />} />
+        </Routes>
+        <Footer/>
+      </Router>
     </div>
   );
 };
 
-export default App;
+export default App; // Ensure this is the default export

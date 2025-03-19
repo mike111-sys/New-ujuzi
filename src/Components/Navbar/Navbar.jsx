@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes, FaFacebookF, FaWhatsapp, FaFacebookMessenger, FaMoon, FaSun, FaChevronDown } from "react-icons/fa";
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 import logo from "../../assets/ujuzi-logo.png";
-
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -55,30 +55,49 @@ const Navbar = () => {
             className="h-10 md:h-12 w-auto mr-3 md:mr-4 cursor-pointer"
           />
           {!isMenuOpen && (
-            <div
+            <Link
+              to="/"
               className={`text-lg md:text-xl md:hidden lg:block font-bold ${
                 isDarkMode ? "text-white" : "text-gray-800"
               } cursor-pointer transition-colors duration-300`}
             >
               Ujuzi Digital Creations
-            </div>
+            </Link>
           )}
         </div>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-6 items-center">
-          {["Home", "About", "Services"].map((item) => (
-            <li key={item}>
-              <a
-                href={`#${item.toLowerCase()}`}
-                className={`${
-                  isDarkMode ? "text-white" : "text-gray-800"
-                } text-sm cursor-pointer transition-colors duration-300`}
-              >
-                {item.toUpperCase()}
-              </a>
-            </li>
-          ))}
+          <li>
+            <Link
+              to="/"
+              className={`${
+                isDarkMode ? "text-white" : "text-gray-800"
+              } text-sm cursor-pointer transition-colors duration-300`}
+            >
+              HOME
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/about"
+              className={`${
+                isDarkMode ? "text-white" : "text-gray-800"
+              } text-sm cursor-pointer transition-colors duration-300`}
+            >
+              ABOUT
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/services"
+              className={`${
+                isDarkMode ? "text-white" : "text-gray-800"
+              } text-sm cursor-pointer transition-colors duration-300`}
+            >
+              SERVICES
+            </Link>
+          </li>
           {/* Why Us Dropdown */}
           <li className="relative">
             <div
@@ -100,27 +119,27 @@ const Navbar = () => {
             >
               {["Why Choose Us", "Clients"].map((item) => (
                 <li key={item}>
-                  <a
-                    href={`#${item.toLowerCase().replace(/ /g, "-")}`}
+                  <Link
+                    to={`/${item.toLowerCase().replace(/ /g, "-")}`}
                     className={`block px-4 py-2 ${
                       isDarkMode ? "text-white hover:bg-gray-700" : "text-gray-600 hover:bg-gray-200"
                     } transition-colors duration-300`}
                   >
                     {item}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
           </li>
           <li>
-            <a
-              href="#reviews"
+            <Link
+              to="/reviews"
               className={`hover:text-blue-400 ${
                 isDarkMode ? "text-white" : "text-gray-800"
               } text-sm cursor-pointer transition-colors duration-300`}
             >
               REVIEWS
-            </a>
+            </Link>
           </li>
           <li>
             <button
@@ -205,53 +224,73 @@ const Navbar = () => {
 
         {/* Centered Menu Items */}
         <ul className="flex flex-col items-center space-y-6 p-6">
-          {["Home", "About", "Services"].map((item) => (
-            <li key={item}>
-              <a
-                href={`#${item.toLowerCase()}`}
-                className={`hover:text-blue-400 ${
-                  isDarkMode ? "text-white" : "text-gray-800"
-                } text-sm cursor-pointer transition-colors duration-300`}
-                onClick={closeMenu}
-              >
-                {item.toUpperCase()}
-              </a>
-            </li>
-          ))}
+          <li>
+            <Link
+              to="/"
+              className={`hover:text-blue-400 ${
+                isDarkMode ? "text-white" : "text-gray-800"
+              } text-sm cursor-pointer transition-colors duration-300`}
+              onClick={closeMenu}
+            >
+              HOME
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/about"
+              className={`hover:text-blue-400 ${
+                isDarkMode ? "text-white" : "text-gray-800"
+              } text-sm cursor-pointer transition-colors duration-300`}
+              onClick={closeMenu}
+            >
+              ABOUT
+            </Link>
+          </li>
+          <li>
+            <Link
+              to="/services"
+              className={`hover:text-blue-400 ${
+                isDarkMode ? "text-white" : "text-gray-800"
+              } text-sm cursor-pointer transition-colors duration-300`}
+              onClick={closeMenu}
+            >
+              SERVICES
+            </Link>
+          </li>
           {/* Why Us Link (No Dropdown in Mobile View) */}
           <li>
-            <a
-              href="#why-us"
+            <Link
+              to="/why-us"
               className={`hover:text-blue-400 ${
                 isDarkMode ? "text-white" : "text-gray-800"
               } text-sm cursor-pointer transition-colors duration-300`}
               onClick={closeMenu}
             >
               WHY US
-            </a>
+            </Link>
           </li>
           {/* Clients Link (Restored in Mobile View) */}
           <li>
-            <a
-              href="#clients"
+            <Link
+              to="/clients"
               className={`hover:text-blue-400 ${
                 isDarkMode ? "text-white" : "text-gray-800"
               } text-sm cursor-pointer transition-colors duration-300`}
               onClick={closeMenu}
             >
               CLIENTS
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              href="#reviews"
+            <Link
+              to="/reviews"
               className={`hover:text-blue-400 ${
                 isDarkMode ? "text-white" : "text-gray-800"
               } text-sm cursor-pointer transition-colors duration-300`}
               onClick={closeMenu}
             >
               REVIEWS
-            </a>
+            </Link>
           </li>
           <li>
             <button
