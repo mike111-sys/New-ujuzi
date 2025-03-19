@@ -7,6 +7,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import About from './Components/About/About';
 import Services from './Components/Services/Services';
 import WhyChooseUs from './Components/WhyChooseUs/WhyChooseUs';
+import Clients from './Components/Clients/Clients';
+import Reviews from './Components/Reviews/Reviews';
 
 const App = () => {
   // Get dark mode preference from localStorage or default to true
@@ -56,8 +58,10 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="/services" element={<Services />} />
           <Route path="/why-choose-us" element={<WhyChooseUs />} />
+          <Route path="/why-choose-us" element={<WhyChooseUs />} />
 
-          <Route path="/why-us" element={<WhyChooseUs />} />
+          <Route path="/clients" element={<Clients />} />
+          <Route path="/reviews" element={<Reviews/>} />
         </Routes>
         <Footer/>
       </Router>
