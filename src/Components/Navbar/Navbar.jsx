@@ -249,7 +249,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
           </li>
           <li>
             <Link
-              to="/why-us"
+              to="/why-choose-us"
               className={`hover:text-blue-400 ${
                 isDarkMode ? "text-white" : "text-gray-800"
               } text-sm cursor-pointer transition-colors duration-300`}

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from './Components/Navbar/Navbar';
-import Hero from './Components/Hero/Hero';
 import Homepage from './Components/Homepage/Homepage';
 import Footer from './Components/Footer/Footer';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
@@ -37,7 +36,7 @@ const AppContent = ({ isDarkMode, setIsDarkMode }) => {
               path="/"
               element={
                 <>
-                  <Hero isDarkMode={isDarkMode} />
+                  
                   <Homepage isDarkMode={isDarkMode} />
                 </>
               }
