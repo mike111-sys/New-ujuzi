@@ -57,7 +57,7 @@ const AppContent = ({ isDarkMode, setIsDarkMode }) => {
 
 const App = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    return localStorage.getItem('darkMode') === 'true' || !localStorage.getItem('darkMode');
+    return localStorage.getItem('darkMode') === 'true';
   });
 
   useEffect(() => {
@@ -73,14 +73,6 @@ const App = () => {
 
   return (
     <div>
-      <button
-        onClick={() => setIsDarkMode(!isDarkMode)}
-        className="fixed top-5 right-5 px-4 py-2 rounded-md shadow-md transition-all duration-300 
-        bg-gray-800 text-white dark:bg-gray-200 dark:text-gray-900"
-      >
-        {isDarkMode ? 'Light Mode' : 'Dark Mode'}
-      </button>
-
       <Router>
         <AppContent isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
       </Router>

@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FaBars, FaTimes, FaFacebookF, FaWhatsapp, FaFacebookMessenger, FaMoon, FaSun, FaChevronDown } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/ujuzi-logo.png";
 import "../Navbar/Navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ isDarkMode, setIsDarkMode }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(true);
   const [isWhyUsOpen, setIsWhyUsOpen] = useState(false);
   const location = useLocation();
 
@@ -19,22 +18,15 @@ const Navbar = () => {
   };
 
   const toggleTheme = () => {
-    setIsDarkMode(!isDarkMode);
+    setIsDarkMode((prev) => {
+      localStorage.setItem("darkMode", !prev); // Persist to localStorage
+      return !prev;
+    });
   };
 
   const toggleWhyUs = () => {
     setIsWhyUsOpen(!isWhyUsOpen);
   };
-
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add("dark-mode");
-      document.documentElement.classList.remove("light-mode");
-    } else {
-      document.documentElement.classList.add("light-mode");
-      document.documentElement.classList.remove("dark-mode");
-    }
-  }, [isDarkMode]);
 
   return (
     <>
