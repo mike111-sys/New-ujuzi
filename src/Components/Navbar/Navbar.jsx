@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes, FaFacebookF, FaWhatsapp, FaFacebookMessenger, FaMoon, FaSun, FaChevronDown } from "react-icons/fa";
-import { Link } from "react-router-dom"; // Import Link from react-router-dom
+import { Link, useLocation } from "react-router-dom"; // Import useLocation
 import logo from "../../assets/ujuzi-logo.png";
+import "../Navbar/Navbar.css"
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [isWhyUsOpen, setIsWhyUsOpen] = useState(false);
+  const location = useLocation(); // Get current location
 
   // Toggle mobile menu
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Close mobile menu
+  // Close mobileA menu
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
@@ -73,9 +75,12 @@ const Navbar = () => {
               to="/"
               className={`${
                 isDarkMode ? "text-white" : "text-gray-800"
-              } text-sm cursor-pointer transition-colors duration-300`}
+              } text-sm cursor-pointer transition-colors duration-300 relative`}
             >
               HOME
+              {location.pathname === "/" && (
+                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 animate-underline"></span>
+              )}
             </Link>
           </li>
           <li>
@@ -83,9 +88,12 @@ const Navbar = () => {
               to="/about"
               className={`${
                 isDarkMode ? "text-white" : "text-gray-800"
-              } text-sm cursor-pointer transition-colors duration-300`}
+              } text-sm cursor-pointer transition-colors duration-300 relative`}
             >
               ABOUT
+              {location.pathname === "/about" && (
+                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 animate-underline"></span>
+              )}
             </Link>
           </li>
           <li>
@@ -93,9 +101,12 @@ const Navbar = () => {
               to="/services"
               className={`${
                 isDarkMode ? "text-white" : "text-gray-800"
-              } text-sm cursor-pointer transition-colors duration-300`}
+              } text-sm cursor-pointer transition-colors duration-300 relative`}
             >
               SERVICES
+              {location.pathname === "/services" && (
+                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 animate-underline"></span>
+              )}
             </Link>
           </li>
           {/* Why Us Dropdown */}
@@ -136,9 +147,12 @@ const Navbar = () => {
               to="/reviews"
               className={`hover:text-blue-400 ${
                 isDarkMode ? "text-white" : "text-gray-800"
-              } text-sm cursor-pointer transition-colors duration-300`}
+              } text-sm cursor-pointer transition-colors duration-300 relative`}
             >
               REVIEWS
+              {location.pathname === "/reviews" && (
+                <span className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 animate-underline"></span>
+              )}
             </Link>
           </li>
           <li>
