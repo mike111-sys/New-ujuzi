@@ -3,20 +3,63 @@ import Navbar from './Components/Navbar/Navbar';
 import Hero from './Components/Hero/Hero';
 import Homepage from './Components/Homepage/Homepage';
 import Footer from './Components/Footer/Footer';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
 import About from './Components/About/About';
 import Services from './Components/Services/Services';
 import WhyChooseUs from './Components/WhyChooseUs/WhyChooseUs';
 import Clients from './Components/Clients/Clients';
 import Reviews from './Components/Reviews/Reviews';
+import Loader from './Components/Loader/Loader';
+
+// Wrap the main App content in a separate component to use `useLocation`
+const AppContent = ({ isDarkMode, setIsDarkMode }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    setIsLoading(true);
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000); // Simulate a 1-second loading time
+
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
+
+  return (
+    <>
+      {isLoading ? (
+        <Loader isDarkMode={isDarkMode} />
+      ) : (
+        <>
+          <Navbar isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Hero isDarkMode={isDarkMode} />
+                  <Homepage isDarkMode={isDarkMode} />
+                </>
+              }
+            />
+            <Route path="/about" element={<About isDarkMode={isDarkMode} />} />
+            <Route path="/services" element={<Services isDarkMode={isDarkMode} />} />
+            <Route path="/why-choose-us" element={<WhyChooseUs isDarkMode={isDarkMode} />} />
+            <Route path="/clients" element={<Clients isDarkMode={isDarkMode} />} />
+            <Route path="/reviews" element={<Reviews isDarkMode={isDarkMode} />} />
+          </Routes>
+          <Footer isDarkMode={isDarkMode} />
+        </>
+      )}
+    </>
+  );
+};
 
 const App = () => {
-  // Get dark mode preference from localStorage or default to true
   const [isDarkMode, setIsDarkMode] = useState(() => {
     return localStorage.getItem('darkMode') === 'true' || !localStorage.getItem('darkMode');
   });
 
-  // Apply dark mode class to <html> on load and when toggled
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add('dark-mode');
@@ -25,13 +68,11 @@ const App = () => {
       document.documentElement.classList.add('light-mode');
       document.documentElement.classList.remove('dark-mode');
     }
-    // Store preference in localStorage
     localStorage.setItem('darkMode', isDarkMode);
   }, [isDarkMode]);
 
   return (
     <div>
-      {/* Dark Mode Toggle Button */}
       <button
         onClick={() => setIsDarkMode(!isDarkMode)}
         className="fixed top-5 right-5 px-4 py-2 rounded-md shadow-md transition-all duration-300 
@@ -40,33 +81,11 @@ const App = () => {
         {isDarkMode ? 'Light Mode' : 'Dark Mode'}
       </button>
 
-      {/* Page Components */}
       <Router>
-        <Navbar />
-        <Routes>
-          {/* Home Route */}
-          <Route
-            path="/"
-            element={
-              <>
-                <Hero />
-                <Homepage />
-              </>
-            }
-          />
-          {/* About Route */}
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/why-choose-us" element={<WhyChooseUs />} />
-          <Route path="/why-choose-us" element={<WhyChooseUs />} />
-
-          <Route path="/clients" element={<Clients />} />
-          <Route path="/reviews" element={<Reviews/>} />
-        </Routes>
-        <Footer/>
+        <AppContent isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
       </Router>
     </div>
   );
 };
 
-export default App; // Ensure this is the default export
+export default App;

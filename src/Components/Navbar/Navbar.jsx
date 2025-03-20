@@ -1,36 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes, FaFacebookF, FaWhatsapp, FaFacebookMessenger, FaMoon, FaSun, FaChevronDown } from "react-icons/fa";
-import { Link, useLocation } from "react-router-dom"; // Import useLocation
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/ujuzi-logo.png";
-import "../Navbar/Navbar.css"
+import "../Navbar/Navbar.css";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [isWhyUsOpen, setIsWhyUsOpen] = useState(false);
-  const location = useLocation(); // Get current location
+  const location = useLocation();
 
-  // Toggle mobile menu
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Close mobileA menu
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
 
-  // Toggle dark/light mode
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);
   };
 
-  // Toggle Why Us dropdown
   const toggleWhyUs = () => {
     setIsWhyUsOpen(!isWhyUsOpen);
   };
 
-  // Apply theme to the entire document
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add("dark-mode");
@@ -43,13 +38,11 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Navbar */}
       <nav
         className={`fixed w-full top-0 z-50 p-4 md:p-5 flex justify-between items-center ${
           isDarkMode ? "bg-gray-900" : "bg-white"
         } shadow-lg transition-colors duration-300`}
       >
-        {/* Logo and Brand Name */}
         <div className="flex items-center">
           <img
             src={logo}
@@ -68,7 +61,6 @@ const Navbar = () => {
           )}
         </div>
 
-        {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-6 items-center">
           <li>
             <Link
@@ -109,7 +101,6 @@ const Navbar = () => {
               )}
             </Link>
           </li>
-          {/* Why Us Dropdown */}
           <li className="relative">
             <div
               className={`flex items-center space-x-1 cursor-pointer ${
@@ -120,7 +111,6 @@ const Navbar = () => {
               <span>WHY US</span>
               <FaChevronDown className="text-sm" />
             </div>
-            {/* Dropdown Menu with Smooth Transition */}
             <ul
               className={`absolute top-8 left-0 w-48 ${
                 isDarkMode ? "bg-gray-800" : "bg-white"
@@ -162,7 +152,6 @@ const Navbar = () => {
               Request A Quote
             </button>
           </li>
-          {/* Theme Toggle with Moon and Sun Icons */}
           <li>
             <div className="flex items-center space-x-2">
               <FaMoon
@@ -196,7 +185,6 @@ const Navbar = () => {
           </li>
         </ul>
 
-        {/* Mobile Menu Button */}
         {!isMenuOpen && (
           <button
             className="md:hidden text-2xl cursor-pointer"
@@ -207,7 +195,6 @@ const Navbar = () => {
         )}
       </nav>
 
-      {/* Mobile Nav Drawer */}
       <div
         className={`fixed inset-y-0 left-0 w-1/2 ${
           isDarkMode ? "bg-gray-900" : "bg-white"
@@ -215,7 +202,6 @@ const Navbar = () => {
           isMenuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        {/* Close Icon */}
         <div className="flex justify-end p-4">
           <button
             className="text-2xl cursor-pointer"
@@ -225,7 +211,6 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Title: Main Menu */}
         <div
           className={`text-center text-lg font-bold ${
             isDarkMode ? "text-white" : "text-gray-800"
@@ -236,7 +221,6 @@ const Navbar = () => {
           Main Menu
         </div>
 
-        {/* Centered Menu Items */}
         <ul className="flex flex-col items-center space-y-6 p-6">
           <li>
             <Link
@@ -271,7 +255,6 @@ const Navbar = () => {
               SERVICES
             </Link>
           </li>
-          {/* Why Us Link (No Dropdown in Mobile View) */}
           <li>
             <Link
               to="/why-us"
@@ -283,7 +266,6 @@ const Navbar = () => {
               WHY US
             </Link>
           </li>
-          {/* Clients Link (Restored in Mobile View) */}
           <li>
             <Link
               to="/clients"
@@ -314,7 +296,6 @@ const Navbar = () => {
               Message Us
             </button>
           </li>
-          {/* Theme Toggle with Moon and Sun Icons */}
           <li>
             <div className="flex items-center space-x-2">
               <FaMoon
@@ -348,7 +329,6 @@ const Navbar = () => {
           </li>
         </ul>
 
-        {/* Social Media Icons */}
         <div className="absolute bottom-2 left-0 w-full flex justify-center space-x-6">
           {[
             { icon: FaFacebookF, color: "blue-400", link: "https://www.facebook.com" },
