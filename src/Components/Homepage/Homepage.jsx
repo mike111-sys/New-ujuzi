@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FaCode,
@@ -112,6 +113,8 @@ const Homepage = () => {
 
     return () => observer.disconnect();
   }, []);
+
+  const navigate = useNavigate();
 
   return (
     <div className="w-full min-h-screen flex flex-col font-poppins">
@@ -229,6 +232,7 @@ const Homepage = () => {
           className={`mt-1 px-6 py-3 rounded-full font-semibold text-lg transition-transform transform hover:scale-105 shadow-lg ${buttonColor}`}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
+          onClick={() => navigate('/contact')}
         >
           Request a Quote
         </motion.button>
@@ -620,6 +624,8 @@ const Homepage = () => {
                 className="px-8 py-4 rounded-full font-bold text-lg text-blue-900 bg-white hover:bg-blue-100 transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+
+                onClick={() => navigate('/contact')}
               >
                 Get Your Free Quote Now
               </motion.button>

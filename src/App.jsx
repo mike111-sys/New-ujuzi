@@ -9,6 +9,7 @@ import WhyChooseUs from './Components/WhyChooseUs/WhyChooseUs';
 import Clients from './Components/Clients/Clients';
 import Reviews from './Components/Reviews/Reviews';
 import Loader from './Components/Loader/Loader';
+import ContactPage from './Components/ContactPage/ContactPage';
 
 // Wrap the main App content in a separate component to use `useLocation`
 const AppContent = ({ isDarkMode, setIsDarkMode }) => {
@@ -46,6 +47,7 @@ const AppContent = ({ isDarkMode, setIsDarkMode }) => {
             <Route path="/why-choose-us" element={<WhyChooseUs isDarkMode={isDarkMode} />} />
             <Route path="/clients" element={<Clients isDarkMode={isDarkMode} />} />
             <Route path="/reviews" element={<Reviews isDarkMode={isDarkMode} />} />
+            <Route path="/contact" element={<ContactPage isDarkMode={isDarkMode} />} />
           </Routes>
           <Footer isDarkMode={isDarkMode} />
         </>

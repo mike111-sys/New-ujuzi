@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 import { FaPhoneAlt, FaMapMarkerAlt, FaEnvelope, FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
 
 const Footer = () => {
@@ -30,6 +31,8 @@ const Footer = () => {
   const buttonColor = isDarkMode
     ? 'bg-yellow-500 hover:bg-yellow-400 text-gray-900'
     : 'bg-blue-600 hover:bg-blue-500 text-white';
+
+const navigate = useNavigate();
 
   return (
     <motion.footer
@@ -106,6 +109,7 @@ const Footer = () => {
             className={`mt-6 px-6 py-3 rounded-full font-semibold text-lg transition-transform transform hover:scale-105 shadow-lg ${buttonColor}`}
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
+            onClick={() => navigate('/contact')}
           >
             Request a Quote
           </motion.button>
