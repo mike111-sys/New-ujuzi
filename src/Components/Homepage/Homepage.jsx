@@ -15,6 +15,11 @@ import {
   FaUserNinja,
   FaUserAstronaut,
   FaUserSecret,
+  FaSearch,
+  FaPenAlt,
+  FaLaptopCode,
+  FaCheck,
+  FaTimes
 } from "react-icons/fa";
 import web from "/src/assets/web.png";
 import video from "/src/assets/video.png";
@@ -313,7 +318,7 @@ const Homepage = () => {
           </div>
         </motion.div>
 
-        {/* Why Choose Us Section */}
+        {/* Process / How It Works Section */}
         <motion.div
           className={`py-16 px-4 sm:px-6 lg:px-8 ${
             isDarkMode ? "bg-gray-800" : "bg-gray-100"
@@ -328,69 +333,96 @@ const Homepage = () => {
               className={`text-4xl sm:text-5xl font-bold mb-8 ${textColor}`}
               variants={itemVariants}
             >
-              Why Choose Ujuzi Digital Creations?
+              Our Process
             </motion.h2>
+            <motion.p
+              className={`text-lg mb-12 ${textColor}`}
+              variants={itemVariants}
+            >
+              We follow a proven 4-step process to deliver exceptional results
+            </motion.p>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-              {/* Innovation */}
+              {/* Consultation */}
               <motion.div
                 className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
                 variants={itemVariants}
+                whileHover={{ y: -5 }}
               >
-                <FaLightbulb className="text-6xl text-yellow-500 mx-auto mb-4" />
-                <h3 className={`text-xl font-semibold mb-2 ${textColor}`}>
-                  Innovation
+                <div className="flex justify-center mb-4">
+                  <div className={`p-4 rounded-full ${isDarkMode ? "bg-gray-700" : "bg-blue-100"}`}>
+                    <FaSearch className="text-3xl text-blue-500" />
+                  </div>
+                </div>
+                <h3 className={`text-xl font-semibold mb-2 text-center ${textColor}`}>
+                  1. Consultation
                 </h3>
-                <p className={cardTextColor}>
-                  We leverage the latest technologies to deliver cutting-edge solutions.
+                <p className={`text-center ${cardTextColor}`}>
+                  We discuss your goals, requirements, and vision for the project.
                 </p>
               </motion.div>
 
-              {/* Expertise */}
+              {/* Design */}
               <motion.div
                 className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
                 variants={itemVariants}
+                whileHover={{ y: -5 }}
               >
-                <FaUsers className="text-6xl text-blue-500 mx-auto mb-4" />
-                <h3 className={`text-xl font-semibold mb-2 ${textColor}`}>
-                  Expertise
+                <div className="flex justify-center mb-4">
+                  <div className={`p-4 rounded-full ${isDarkMode ? "bg-gray-700" : "bg-purple-100"}`}>
+                    <FaPenAlt className="text-3xl text-purple-500" />
+                  </div>
+                </div>
+                <h3 className={`text-xl font-semibold mb-2 text-center ${textColor}`}>
+                  2. Design
                 </h3>
-                <p className={cardTextColor}>
-                  Our team of professionals has years of experience in the digital space.
+                <p className={`text-center ${cardTextColor}`}>
+                  Our designers create mockups and prototypes for your approval.
                 </p>
               </motion.div>
 
-              {/* Results-Driven */}
+              {/* Development */}
               <motion.div
                 className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
                 variants={itemVariants}
+                whileHover={{ y: -5 }}
               >
-                <FaRocket className="text-6xl text-red-500 mx-auto mb-4" />
-                <h3 className={`text-xl font-semibold mb-2 ${textColor}`}>
-                  Results-Driven
+                <div className="flex justify-center mb-4">
+                  <div className={`p-4 rounded-full ${isDarkMode ? "bg-gray-700" : "bg-green-100"}`}>
+                    <FaLaptopCode className="text-3xl text-green-500" />
+                  </div>
+                </div>
+                <h3 className={`text-xl font-semibold mb-2 text-center ${textColor}`}>
+                  3. Development
                 </h3>
-                <p className={cardTextColor}>
-                  We focus on delivering measurable results that grow your business.
+                <p className={`text-center ${cardTextColor}`}>
+                  Our developers bring the design to life with clean, efficient code.
                 </p>
               </motion.div>
 
-              {/* Award-Winning */}
+              {/* Launch */}
               <motion.div
                 className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
                 variants={itemVariants}
+                whileHover={{ y: -5 }}
               >
-                <FaAward className="text-6xl text-green-500 mx-auto mb-4" />
-                <h3 className={`text-xl font-semibold mb-2 ${textColor}`}>
-                  Award-Winning
+                <div className="flex justify-center mb-4">
+                  <div className={`p-4 rounded-full ${isDarkMode ? "bg-gray-700" : "bg-yellow-100"}`}>
+                    <FaRocket className="text-3xl text-yellow-500" />
+                  </div>
+                </div>
+                <h3 className={`text-xl font-semibold mb-2 text-center ${textColor}`}>
+                  4. Launch
                 </h3>
-                <p className={cardTextColor}>
-                  Recognized for excellence in digital innovation and customer satisfaction.
+                <p className={`text-center ${cardTextColor}`}>
+                  We deploy your project and provide ongoing support as needed.
                 </p>
               </motion.div>
             </div>
           </div>
         </motion.div>
 
-        {/* Testimonials Section */}
+        {/* Compare Website Plans Section */}
         <motion.div
           className={`py-16 px-4 sm:px-6 lg:px-8 ${backgroundColor}`}
           variants={containerVariants}
@@ -403,99 +435,195 @@ const Homepage = () => {
               className={`text-4xl sm:text-5xl font-bold mb-8 ${textColor}`}
               variants={itemVariants}
             >
-              What Our Clients Say
+              Compare Website Plans
             </motion.h2>
             <motion.p
               className={`text-lg mb-12 ${textColor}`}
               variants={itemVariants}
             >
-              Hear from some of our satisfied clients who have experienced the Ujuzi difference.
+              Choose the perfect package for your business needs
             </motion.p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {/* Testimonial 1 */}
+
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Starter Plan */}
               <motion.div
-                className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
+                className={`rounded-xl overflow-hidden shadow-lg ${cardBackgroundColor}`}
                 variants={itemVariants}
+                whileHover={{ scale: 1.02 }}
               >
-                <FaUser className="text-6xl text-blue-500 mx-auto mb-4" />
-                <p className={`italic mb-4 ${cardTextColor}`}>
-                  "Ujuzi Digital Creations transformed our online presence. Their team is professional, creative, and results-driven!"
-                </p>
-                <p className={`font-semibold ${textColor}`}>
-                  - Jane Doe, CEO of XYZ Company
-                </p>
+                <div className={`py-6 px-4 ${isDarkMode ? "bg-gray-700" : "bg-blue-100"}`}>
+                  <h3 className={`text-2xl font-bold ${textColor}`}>Starter</h3>
+                  <p className={`text-4xl font-bold my-4 ${textColor}`}>$499</p>
+                  <p className={cardTextColor}>Perfect for small businesses</p>
+                </div>
+                <div className="p-6">
+                  <ul className="space-y-3">
+                    <li className="flex items-center">
+                      <FaCheck className="text-green-500 mr-2" />
+                      <span className={cardTextColor}>5 Pages Website</span>
+                    </li>
+                    <li className="flex items-center">
+                      <FaCheck className="text-green-500 mr-2" />
+                      <span className={cardTextColor}>Mobile Responsive</span>
+                    </li>
+                    <li className="flex items-center">
+                      <FaCheck className="text-green-500 mr-2" />
+                      <span className={cardTextColor}>Basic SEO</span>
+                    </li>
+                    <li className="flex items-center">
+                      <FaTimes className="text-red-500 mr-2" />
+                      <span className={`${isDarkMode ? "text-gray-400" : "text-gray-500"}`}>E-commerce</span>
+                    </li>
+                    <li className="flex items-center">
+                      <FaTimes className="text-red-500 mr-2" />
+                      <span className={`${isDarkMode ? "text-gray-400" : "text-gray-500"}`}>CMS Integration</span>
+                    </li>
+                  </ul>
+                  <motion.button
+                    className={`w-full mt-8 py-3 rounded-lg font-semibold ${
+                      isDarkMode
+                        ? "bg-blue-600 hover:bg-blue-700 text-white"
+                        : "bg-blue-500 hover:bg-blue-600 text-white"
+                    }`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Get Started
+                  </motion.button>
+                </div>
               </motion.div>
 
-              {/* Testimonial 2 */}
+              {/* Pro Plan */}
               <motion.div
-                className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
+                className={`rounded-xl overflow-hidden shadow-lg ${cardBackgroundColor}`}
                 variants={itemVariants}
+                whileHover={{ scale: 1.02 }}
               >
-                <FaUserTie className="text-6xl text-purple-500 mx-auto mb-4" />
-                <p className={`italic mb-4 ${cardTextColor}`}>
-                  "The video editing services were top-notch. Our brand story has never been more compelling!"
-                </p>
-                <p className={`font-semibold ${textColor}`}>
-                  - John Smith, Marketing Director
-                </p>
+                <div className={`py-6 px-4 ${isDarkMode ? "bg-gray-700" : "bg-purple-100"}`}>
+                  <h3 className={`text-2xl font-bold ${textColor}`}>Pro</h3>
+                  <p className={`text-4xl font-bold my-4 ${textColor}`}>$999</p>
+                  <p className={cardTextColor}>Ideal for growing businesses</p>
+                </div>
+                <div className="p-6">
+                  <ul className="space-y-3">
+                    <li className="flex items-center">
+                      <FaCheck className="text-green-500 mr-2" />
+                      <span className={cardTextColor}>10 Pages Website</span>
+                    </li>
+                    <li className="flex items-center">
+                      <FaCheck className="text-green-500 mr-2" />
+                      <span className={cardTextColor}>Mobile Responsive</span>
+                    </li>
+                    <li className="flex items-center">
+                      <FaCheck className="text-green-500 mr-2" />
+                      <span className={cardTextColor}>Advanced SEO</span>
+                    </li>
+                    <li className="flex items-center">
+                      <FaCheck className="text-green-500 mr-2" />
+                      <span className={cardTextColor}>Basic E-commerce</span>
+                    </li>
+                    <li className="flex items-center">
+                      <FaTimes className="text-red-500 mr-2" />
+                      <span className={`${isDarkMode ? "text-gray-400" : "text-gray-500"}`}>Custom CMS</span>
+                    </li>
+                  </ul>
+                  <motion.button
+                    className={`w-full mt-8 py-3 rounded-lg font-semibold ${
+                      isDarkMode
+                        ? "bg-purple-600 hover:bg-purple-700 text-white"
+                        : "bg-purple-500 hover:bg-purple-600 text-white"
+                    }`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Get Started
+                  </motion.button>
+                </div>
               </motion.div>
 
-              {/* Testimonial 3 */}
+              {/* Enterprise Plan */}
               <motion.div
-                className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
+                className={`rounded-xl overflow-hidden shadow-lg ${cardBackgroundColor}`}
                 variants={itemVariants}
+                whileHover={{ scale: 1.02 }}
               >
-                <FaUserGraduate className="text-6xl text-pink-500 mx-auto mb-4" />
-                <p className={`italic mb-4 ${cardTextColor}`}>
-                  "Their digital marketing strategies have significantly increased our online engagement. Highly recommend!"
-                </p>
-                <p className={`font-semibold ${textColor}`}>
-                  - Mary Johnson, Founder of ABC Startup
-                </p>
-              </motion.div>
-
-              {/* Testimonial 4 */}
-              <motion.div
-                className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
-                variants={itemVariants}
-              >
-                <FaUserNinja className="text-6xl text-green-500 mx-auto mb-4" />
-                <p className={`italic mb-4 ${cardTextColor}`}>
-                  "Ujuzi's web design team is phenomenal! They delivered a website that exceeded our expectations."
-                </p>
-                <p className={`font-semibold ${textColor}`}>
-                  - Alex Kim, Entrepreneur
-                </p>
-              </motion.div>
-
-              {/* Testimonial 5 */}
-              <motion.div
-                className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
-                variants={itemVariants}
-              >
-                <FaUserAstronaut className="text-6xl text-red-500 mx-auto mb-4" />
-                <p className={`italic mb-4 ${cardTextColor}`}>
-                  "The graphic designs created by Ujuzi are simply stunning. They perfectly captured our brand identity."
-                </p>
-                <p className={`font-semibold ${textColor}`}>
-                  - Sarah Lee, Creative Director
-                </p>
-              </motion.div>
-
-              {/* Testimonial 6 */}
-              <motion.div
-                className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
-                variants={itemVariants}
-              >
-                <FaUserSecret className="text-6xl text-yellow-500 mx-auto mb-4" />
-                <p className={`italic mb-4 ${cardTextColor}`}>
-                  "Ujuzi's team is incredibly talented and easy to work with. They truly understand our needs."
-                </p>
-                <p className={`font-semibold ${textColor}`}>
-                  - Michael Brown, Business Owner
-                </p>
+                <div className={`py-6 px-4 ${isDarkMode ? "bg-gray-700" : "bg-green-100"}`}>
+                  <h3 className={`text-2xl font-bold ${textColor}`}>Enterprise</h3>
+                  <p className={`text-4xl font-bold my-4 ${textColor}`}>$1999+</p>
+                  <p className={cardTextColor}>For large scale businesses</p>
+                </div>
+                <div className="p-6">
+                  <ul className="space-y-3">
+                    <li className="flex items-center">
+                      <FaCheck className="text-green-500 mr-2" />
+                      <span className={cardTextColor}>Unlimited Pages</span>
+                    </li>
+                    <li className="flex items-center">
+                      <FaCheck className="text-green-500 mr-2" />
+                      <span className={cardTextColor}>Mobile Responsive</span>
+                    </li>
+                    <li className="flex items-center">
+                      <FaCheck className="text-green-500 mr-2" />
+                      <span className={cardTextColor}>Premium SEO</span>
+                    </li>
+                    <li className="flex items-center">
+                      <FaCheck className="text-green-500 mr-2" />
+                      <span className={cardTextColor}>Advanced E-commerce</span>
+                    </li>
+                    <li className="flex items-center">
+                      <FaCheck className="text-green-500 mr-2" />
+                      <span className={cardTextColor}>Custom CMS</span>
+                    </li>
+                  </ul>
+                  <motion.button
+                    className={`w-full mt-8 py-3 rounded-lg font-semibold ${
+                      isDarkMode
+                        ? "bg-green-600 hover:bg-green-700 text-white"
+                        : "bg-green-500 hover:bg-green-600 text-white"
+                    }`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Get Started
+                  </motion.button>
+                </div>
               </motion.div>
             </div>
+          </div>
+        </motion.div>
+
+        {/* Call To Action Section */}
+        <motion.div
+          className={`py-16 px-4 sm:px-6 lg:px-8 ${
+            isDarkMode ? "bg-gray-900" : "bg-blue-600"
+          }`}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <div className="max-w-7xl mx-auto text-center">
+            <motion.h2
+              className="text-4xl sm:text-5xl font-bold mb-8 text-white"
+              variants={itemVariants}
+            >
+              Ready to Transform Your Digital Presence?
+            </motion.h2>
+            <motion.p
+              className="text-xl mb-12 text-blue-100"
+              variants={itemVariants}
+            >
+              Contact us today to discuss your project and get a free consultation.
+            </motion.p>
+            <motion.div variants={itemVariants}>
+              <motion.button
+                className="px-8 py-4 rounded-full font-bold text-lg text-blue-900 bg-white hover:bg-blue-100 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Get Your Free Quote Now
+              </motion.button>
+            </motion.div>
           </div>
         </motion.div>
       </div>
