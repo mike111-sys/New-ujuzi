@@ -457,7 +457,7 @@ const Homepage = () => {
               >
                 <div className={`py-6 px-4 ${isDarkMode ? "bg-gray-700" : "bg-blue-100"}`}>
                   <h3 className={`text-2xl font-bold ${textColor}`}>Starter</h3>
-                  <p className={`text-4xl font-bold my-4 ${textColor}`}>$499</p>
+                  <p className={`text-4xl font-bold my-4 ${textColor}`}>$125</p>
                   <p className={cardTextColor}>Perfect for small businesses</p>
                 </div>
                 <div className="p-6">
@@ -505,7 +505,7 @@ const Homepage = () => {
               >
                 <div className={`py-6 px-4 ${isDarkMode ? "bg-gray-700" : "bg-purple-100"}`}>
                   <h3 className={`text-2xl font-bold ${textColor}`}>Pro</h3>
-                  <p className={`text-4xl font-bold my-4 ${textColor}`}>$999</p>
+                  <p className={`text-4xl font-bold my-4 ${textColor}`}>$195</p>
                   <p className={cardTextColor}>Ideal for growing businesses</p>
                 </div>
                 <div className="p-6">
@@ -553,7 +553,7 @@ const Homepage = () => {
               >
                 <div className={`py-6 px-4 ${isDarkMode ? "bg-gray-700" : "bg-green-100"}`}>
                   <h3 className={`text-2xl font-bold ${textColor}`}>Enterprise</h3>
-                  <p className={`text-4xl font-bold my-4 ${textColor}`}>$1999+</p>
+                  <p className={`text-4xl font-bold my-4 ${textColor}`}>$250+</p>
                   <p className={cardTextColor}>For large scale businesses</p>
                 </div>
                 <div className="p-6">
