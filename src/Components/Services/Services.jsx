@@ -502,7 +502,7 @@ const Services = () => {
             >
               <button
                 onClick={() => setIsModalOpen(false)}
-                className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+                className="absolute cursor-pointer top-4 right-4 text-gray-500 hover:text-gray-700"
               >
                 <FaTimes className="text-2xl" />
               </button>
@@ -549,7 +549,7 @@ const Services = () => {
                 </div>
                 <button
                   type="submit"
-                  className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300"
+                  className="bg-blue-600 cursor-pointer text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300"
                 >
                   Submit
                 </button>

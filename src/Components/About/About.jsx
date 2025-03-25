@@ -1,11 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaLightbulb, FaHandshake, FaUsers, FaGlobeAfrica, FaHeart } from 'react-icons/fa';
+import { FaLightbulb, FaHandshake, FaTimes, FaUsers, FaGlobeAfrica, FaHeart } from 'react-icons/fa';
 
 const About = () => {
   const [isDarkMode, setIsDarkMode] = useState(
     document.documentElement.classList.contains('dark-mode')
   );
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert('Thank you for your order! We will contact you shortly.');
+    setIsModalOpen(false); // Close the modal after submission
+  };
+
 
   // Observe changes to the dark-mode class
   useEffect(() => {
@@ -59,6 +67,15 @@ const About = () => {
       whileInView="visible"
       viewport={{ once: true }}
     >
+
+
+
+
+
+
+
+
+      
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <motion.h1
@@ -219,11 +236,76 @@ const About = () => {
           </motion.p>
           <button
             className={`bg-blue-600 cursor-pointer text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300`}
+            onClick={() => setIsModalOpen(true)}
           >
             Get in Touch
           </button>
         </motion.div>
-      </div>
+
+        {/* Modal for Ordering Services */}
+        {isModalOpen && (
+          <motion.div
+            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <motion.div
+              className={`${cardBackgroundColor} rounded-lg p-8 w-full max-w-md relative`}
+              initial={{ y: -50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -50, opacity: 0 }}
+            >
+              <button
+                onClick={() => setIsModalOpen(false)}
+                className="absolute cursor-pointer top-4 right-4 text-gray-500 hover:text-gray-700"
+              >
+                <FaTimes className="text-2xl" />
+              </button>
+              <h2 className={`text-2xl font-bold mb-6 ${textColor}`}>Get In Touch</h2>
+              <form onSubmit={handleSubmit}>
+                <div className="mb-4">
+                  <label className={`block text-sm font-medium mb-2 ${textColor}`}>Name</label>
+                  <input
+                    type="text"
+                    required
+                    className={`w-full p-2 rounded-lg ${cardBackgroundColor} border ${cardTextColor}`}
+                    placeholder="Enter your name"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className={`block text-sm font-medium mb-2 ${textColor}`}>Email</label>
+                  <input
+                    type="email"
+                    required
+                    className={`w-full p-2 rounded-lg ${cardBackgroundColor} border ${cardTextColor}`}
+                    placeholder="Enter your email"
+                  />
+                </div>
+                <div className="mb-6">
+                  <label className={`block text-sm font-medium mb-2 ${textColor}`}>Message</label>
+                  <textarea
+                    className={`w-full p-2 rounded-lg ${cardBackgroundColor} border ${cardTextColor}`}
+                    rows="4"
+                    placeholder="Describe your requirements"
+                  ></textarea>
+                </div>
+                <button
+                  type="submit"
+                  className="bg-blue-600 cursor-pointer text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300"
+                >
+                  Submit
+                </button>
+              </form>
+            </motion.div>
+          </motion.div>
+        )}
+
+
+
+
+
+         </div>      
     </motion.div>
   );
 };
