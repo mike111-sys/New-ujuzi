@@ -218,7 +218,7 @@ const About = () => {
             Whether you're a startup or an established business, we’re here to help you achieve your digital goals. Let’s create something amazing together!
           </motion.p>
           <button
-            className={`bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300`}
+            className={`bg-blue-600 cursor-pointer text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300`}
           >
             Get in Touch
           </button>

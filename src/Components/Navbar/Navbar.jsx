@@ -3,8 +3,12 @@ import { FaBars, FaTimes, FaFacebookF, FaWhatsapp, FaFacebookMessenger, FaMoon, 
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../assets/ujuzi-logo.png";
 import "../Navbar/Navbar.css";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ isDarkMode, setIsDarkMode }) => {
+
+const navigate = useNavigate();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isWhyUsOpen, setIsWhyUsOpen] = useState(false);
   const location = useLocation();
@@ -140,6 +144,7 @@ const Navbar = ({ isDarkMode, setIsDarkMode }) => {
           <li>
             <button
               className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 cursor-pointer transition-colors duration-300"
+            onClick={() => navigate('/contact')}
             >
               Request A Quote
             </button>

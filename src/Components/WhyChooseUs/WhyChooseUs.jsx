@@ -279,7 +279,7 @@ const WhyChooseUs = () => {
             Let’s work together to create something extraordinary. Contact us today!
           </p>
           <button
-            className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300"
+            className="bg-blue-600 cursor-pointer text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300"
             onClick={() => setIsModalOpen(true)}
           >
             Get in Touch

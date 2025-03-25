@@ -7,15 +7,6 @@ import {
   FaPaintBrush,
   FaChartLine,
   FaRocket,
-  FaLightbulb,
-  FaUsers,
-  FaAward,
-  FaUser,
-  FaUserTie,
-  FaUserGraduate,
-  FaUserNinja,
-  FaUserAstronaut,
-  FaUserSecret,
   FaSearch,
   FaPenAlt,
   FaLaptopCode,
@@ -57,6 +48,33 @@ const slides = [
 const buttonColor = "bg-yellow-500 hover:bg-yellow-400 text-gray-900";
 
 const Homepage = () => {
+
+  const handleWhatsAppChat1 = () => {
+    const phoneNumber = "+254741238738";
+    const message = encodeURIComponent("Hello, can I get the Starter plan?");
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+    window.open(whatsappURL, "_blank");
+  };
+
+  const handleWhatsAppChat2 = () => {
+    const phoneNumber = "+254741238738";
+    const message = encodeURIComponent("Hello, can I get the pro plan?");
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+    window.open(whatsappURL, "_blank");
+  };
+
+  const handleWhatsAppChat3 = () => {
+    const phoneNumber = "+254741238738";
+    const message = encodeURIComponent("Hello, can I get the Enterprise plan?");
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
+    window.open(whatsappURL, "_blank");
+  };
+
+
+
+
+
+
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isDarkMode, setIsDarkMode] = useState(
     document.documentElement.classList.contains("dark-mode")
@@ -491,6 +509,7 @@ const Homepage = () => {
                     }`}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
+                    onClick={handleWhatsAppChat1}
                   >
                     Get Started
                   </motion.button>
@@ -539,6 +558,7 @@ const Homepage = () => {
                     }`}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
+                    onClick={handleWhatsAppChat2}
                   >
                     Get Started
                   </motion.button>
@@ -587,6 +607,7 @@ const Homepage = () => {
                     }`}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
+                    onClick={handleWhatsAppChat3}
                   >
                     Get Started
                   </motion.button>
@@ -621,7 +642,7 @@ const Homepage = () => {
             </motion.p>
             <motion.div variants={itemVariants}>
               <motion.button
-                className="px-8 py-4 rounded-full font-bold text-lg text-blue-900 bg-white hover:bg-blue-100 transition-colors"
+                className="px-8 py-4 cursor-pointer rounded-full font-bold text-lg text-blue-900 bg-white hover:bg-blue-100 transition-colors"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
 

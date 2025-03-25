@@ -42,7 +42,7 @@ const ContactPage = ({ isDarkMode: propDarkMode }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className={`min-h-screen flex items-center justify-center p-4 transition-colors duration-300 ${
+      className={`min-h-screen mt-19 flex items-center justify-center p-4 transition-colors duration-300 ${
         isDarkMode 
           ? 'bg-gray-900' 
           : 'bg-gradient-to-r from-blue-50 to-purple-50'
@@ -113,7 +113,7 @@ const ContactPage = ({ isDarkMode: propDarkMode }) => {
                     ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400'
                     : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
                 }`}
-                placeholder="John Doe"
+                placeholder="Enter Your Name"
                 required
               />
             </div>
@@ -135,7 +135,7 @@ const ContactPage = ({ isDarkMode: propDarkMode }) => {
                     ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400'
                     : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
                 }`}
-                placeholder="your@email.com"
+                placeholder="Enter Your Email"
                 required
               />
             </div>
@@ -191,7 +191,7 @@ const ContactPage = ({ isDarkMode: propDarkMode }) => {
             {/* Submit Button */}
             <motion.button
               type="submit"
-              className={`w-full flex items-center justify-center py-4 px-6 rounded-lg font-bold transition-colors duration-300 ${
+              className={`w-full flex cursor-pointer items-center justify-center py-4 px-6 rounded-lg font-bold transition-colors duration-300 ${
                 isDarkMode
                   ? 'bg-blue-600 hover:bg-blue-500'
                   : 'bg-blue-500 hover:bg-blue-600'
