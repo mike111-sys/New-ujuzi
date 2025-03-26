@@ -13,10 +13,10 @@ import {
   FaCheck,
   FaTimes
 } from "react-icons/fa";
-import web from "/src/assets/web.png";
-import video from "/src/assets/video.png";
-import graphic from "/src/assets/graphic.jpg";
-import marketing from "/src/assets/marketing.jpg";
+import web from "/src/assets/web.jpeg";
+import video from "/src/assets/video.jpeg";
+import graphic from "/src/assets/graphic.jpeg";
+import marketing from "/src/assets/marketing.jpeg";
 
 const slides = [
   {
@@ -228,7 +228,7 @@ const Homepage = () => {
             key={`mobile-image-${currentSlide}`}
             src={slides[currentSlide].image}
             alt="Slide"
-            className="w-full h-[350px] object-cover rounded-lg shadow-lg"
+            className="w-full h-[350px] object-center rounded-lg shadow-lg"
             initial={{ scale: 1.2, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
