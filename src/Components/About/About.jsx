@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { FaLightbulb, FaHandshake, FaTimes, FaUsers, FaGlobeAfrica, FaHeart } from 'react-icons/fa';
+import { FaLightbulb, FaHandshake, FaTimes, FaUsers, FaGlobeAfrica } from 'react-icons/fa';
+import georgeOchieng from "../../assets/George-Ochieng.jpg";
+import johnMuchuku from "../../assets/John-Muchuku.jpg";
+import levisRabah from "../../assets/Levis-Rabah.jpg";
+import michaelJuma from "../../assets/Michael-Juma.jpg";
 
 const About = () => {
   const [isDarkMode, setIsDarkMode] = useState(
@@ -11,11 +15,9 @@ const About = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     alert('Thank you for your order! We will contact you shortly.');
-    setIsModalOpen(false); // Close the modal after submission
+    setIsModalOpen(false);
   };
 
-
-  // Observe changes to the dark-mode class
   useEffect(() => {
     const observer = new MutationObserver(() => {
       setIsDarkMode(document.documentElement.classList.contains('dark-mode'));
@@ -29,7 +31,6 @@ const About = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Framer Motion variants for animations
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -51,13 +52,91 @@ const About = () => {
     },
   };
 
-  // Dynamic styles based on dark mode
+  const teamMemberVariants = {
+    hidden: { opacity: 0, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.5 }
+    },
+    hover: {
+      y: -10,
+      transition: { duration: 0.3 }
+    }
+  };
+
   const backgroundColor = isDarkMode
     ? 'bg-gradient-to-r from-gray-900 to-gray-800'
     : 'bg-gradient-to-r from-blue-50 to-purple-50';
   const textColor = isDarkMode ? 'text-white' : 'text-gray-900';
   const cardBackgroundColor = isDarkMode ? 'bg-gray-800' : 'bg-white';
   const cardTextColor = isDarkMode ? 'text-gray-200' : 'text-gray-600';
+  const dividerColor = isDarkMode ? 'bg-blue-400' : 'bg-blue-600';
+
+  const teamMembers = [
+    {
+      id: 1,
+      name: "John Muchuku",
+      role: "Frontend Architect",
+      bio: "Dedicated Frontend developer specializing in React, Next.js and Vite. Creates pixel-perfect UIs with 3+ years experience building responsive web applications.",
+      skills: ["React", "Next.js", "Vite", "TypeScript", "Tailwind"],
+      image: johnMuchuku,
+      accentColor: "blue",
+    },
+    {
+      id: 2,
+      name: "George Ochieng",
+      role: "Full Stack Engineer",
+      bio: "Full stack web developer proficient in full software development lifecycle. Strong knowledge in agile methodologies and SDLC principles with 5+ years experience.",
+      skills: ["Node.js", "Agile", "SDLC", "MongoDB", "AWS"],
+      image: georgeOchieng,
+      accentColor: "green",
+    },
+    {
+      id: 3,
+      name: "Michael Juma",
+      role: "Laravel Specialist",
+      bio: "Full Stack developer specializing in Laravel with 4 years experience building robust backend systems. Loves creating efficient APIs and scalable database architectures.",
+      skills: ["Laravel", "PHP", "MySQL", "REST APIs", "Docker"],
+      image: michaelJuma,
+      accentColor: "purple",
+    },
+    {
+      id: 4,
+      name: "Levis Rabah",
+      role: "Python & JS Wizard",
+      bio: "Full Stack developer using Python and JavaScript. Builds AI-powered applications and loves solving complex problems with clean, maintainable code.",
+      skills: ["Python", "Django", "JavaScript", "AI/ML", "Flask"],
+      image: levisRabah,
+      accentColor: "yellow",
+    }
+  ];
+
+  const getColorClasses = (color) => {
+    const colors = {
+      blue: {
+        text: isDarkMode ? 'text-blue-300' : 'text-blue-600',
+        bg: isDarkMode ? 'bg-blue-900/30' : 'bg-blue-100',
+        border: 'border-blue-500'
+      },
+      green: {
+        text: isDarkMode ? 'text-green-300' : 'text-green-600',
+        bg: isDarkMode ? 'bg-green-900/30' : 'bg-green-100',
+        border: 'border-green-500'
+      },
+      purple: {
+        text: isDarkMode ? 'text-purple-300' : 'text-purple-600',
+        bg: isDarkMode ? 'bg-purple-900/30' : 'bg-purple-100',
+        border: 'border-purple-500'
+      },
+      yellow: {
+        text: isDarkMode ? 'text-yellow-300' : 'text-yellow-600',
+        bg: isDarkMode ? 'bg-yellow-900/30' : 'bg-yellow-100',
+        border: 'border-yellow-500'
+      }
+    };
+    return colors[color] || colors.blue;
+  };
 
   return (
     <motion.div
@@ -67,15 +146,6 @@ const About = () => {
       whileInView="visible"
       viewport={{ once: true }}
     >
-
-
-
-
-
-
-
-
-      
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <motion.h1
@@ -158,62 +228,71 @@ const About = () => {
           </motion.div>
         </motion.div>
 
-        {/* Team Section */}
+        {/* Enhanced Team Section */}
         <motion.div
-          className="mb-16 text-center"
+          className="mb-16"
           variants={itemVariants}
         >
-          <motion.h2
-            className={`text-3xl font-bold mb-6 ${textColor}`}
-            variants={itemVariants}
-          >
-            Meet Our Team
-          </motion.h2>
-          <motion.p
-            className={`text-lg max-w-2xl mx-auto mb-8 ${cardTextColor}`}
-            variants={itemVariants}
-          >
-            Our team is a diverse group of passionate professionals dedicated to delivering excellence in every project.
-          </motion.p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Team Member 1 */}
-            <motion.div
-              className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
+          <motion.div className="text-center mb-12">
+            <motion.h2
+              className={`text-3xl font-bold mb-4 ${textColor}`}
               variants={itemVariants}
             >
-              <div className="w-24 h-24 bg-blue-500 rounded-full mx-auto mb-4"></div>
-              <h3 className={`text-xl font-semibold mb-2 ${textColor}`}>John Doe</h3>
-              <p className={`text-sm text-gray-500 mb-2`}>Lead Developer</p>
-              <p className={cardTextColor}>
-                John is a tech enthusiast with a passion for building scalable web applications.
-              </p>
+              Meet Our Team
+            </motion.h2>
+            <motion.p
+              className={`text-lg max-w-3xl mx-auto ${cardTextColor}`}
+              variants={itemVariants}
+            >
+              Our team is a diverse group of passionate professionals dedicated to delivering excellence in every project.
+            </motion.p>
+            <motion.div 
+              className="flex justify-center mt-6"
+              variants={itemVariants}
+            >
+              <div className={`h-1 w-20 rounded-full ${dividerColor}`}></div>
             </motion.div>
+          </motion.div>
 
-            {/* Team Member 2 */}
-            <motion.div
-              className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
-              variants={itemVariants}
-            >
-              <div className="w-24 h-24 bg-purple-500 rounded-full mx-auto mb-4"></div>
-              <h3 className={`text-xl font-semibold mb-2 ${textColor}`}>Jane Smith</h3>
-              <p className={`text-sm text-gray-500 mb-2`}>Creative Director</p>
-              <p className={cardTextColor}>
-                Jane brings creativity and innovation to every design project she leads.
-              </p>
-            </motion.div>
-
-            {/* Team Member 3 */}
-            <motion.div
-              className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
-              variants={itemVariants}
-            >
-              <div className="w-24 h-24 bg-green-500 rounded-full mx-auto mb-4"></div>
-              <h3 className={`text-xl font-semibold mb-2 ${textColor}`}>Alex Johnson</h3>
-              <p className={`text-sm text-gray-500 mb-2`}>Digital Marketing Specialist</p>
-              <p className={cardTextColor}>
-                Alex is a results-driven marketer with a knack for growing online audiences.
-              </p>
-            </motion.div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {teamMembers.map((member) => {
+              const colors = getColorClasses(member.accentColor);
+              return (
+                <motion.div
+                  key={member.id}
+                  className={`flex flex-col rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
+                  variants={teamMemberVariants}
+                >
+                  <div className="relative pt-[100%] overflow-hidden">
+                    <img 
+                      src={member.image} 
+                      alt={member.name} 
+                      className="absolute top-0 left-0 w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-6 flex-1 flex flex-col">
+                    <div className="mb-4">
+                      <h3 className={`text-xl font-semibold mb-1 ${textColor}`}>{member.name}</h3>
+                      <p className={`text-sm ${colors.text} mb-3`}>{member.role}</p>
+                      <p className={`text-sm ${cardTextColor}`}>{member.bio}</p>
+                    </div>
+                    <div className="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
+                      <h4 className={`text-xs uppercase font-semibold mb-2 ${colors.text}`}>Skills</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {member.skills.map((skill, index) => (
+                          <span 
+                            key={index}
+                            className={`text-xs px-2 py-1 rounded-full ${colors.bg} ${colors.text}`}
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </motion.div>
 
@@ -232,7 +311,7 @@ const About = () => {
             className={`text-lg max-w-2xl mx-auto mb-8 ${cardTextColor}`}
             variants={itemVariants}
           >
-            Whether you're a startup or an established business, we’re here to help you achieve your digital goals. Let’s create something amazing together!
+            Whether you're a startup or an established business, we're here to help you achieve your digital goals. Let's create something amazing together!
           </motion.p>
           <button
             className={`bg-blue-600 cursor-pointer text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300`}
@@ -300,12 +379,7 @@ const About = () => {
             </motion.div>
           </motion.div>
         )}
-
-
-
-
-
-         </div>      
+      </div>
     </motion.div>
   );
 };
