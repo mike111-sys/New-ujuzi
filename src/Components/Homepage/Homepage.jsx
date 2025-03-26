@@ -51,21 +51,21 @@ const Homepage = () => {
 
   const handleWhatsAppChat1 = () => {
     const phoneNumber = "+254741238738";
-    const message = encodeURIComponent("Hello, can I get the Starter plan?");
+    const message = encodeURIComponent("Hello, can I get more details on the Starter Plan?");
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
     window.open(whatsappURL, "_blank");
   };
 
   const handleWhatsAppChat2 = () => {
     const phoneNumber = "+254741238738";
-    const message = encodeURIComponent("Hello, can I get the pro plan?");
+    const message = encodeURIComponent("Hello, can I get more details on the Pro Plan?");
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
     window.open(whatsappURL, "_blank");
   };
 
   const handleWhatsAppChat3 = () => {
     const phoneNumber = "+254741238738";
-    const message = encodeURIComponent("Hello, can I get the Enterprise plan?");
+    const message = encodeURIComponent("Hello, can I get more details on the Enterprise Plan?");
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${message}`;
     window.open(whatsappURL, "_blank");
   };
@@ -580,7 +580,7 @@ const Homepage = () => {
                   <ul className="space-y-3">
                     <li className="flex items-center">
                       <FaCheck className="text-green-500 mr-2" />
-                      <span className={cardTextColor}>Unlimited Pages</span>
+                      <span className={cardTextColor}>Unlimited Pages Website</span>
                     </li>
                     <li className="flex items-center">
                       <FaCheck className="text-green-500 mr-2" />
