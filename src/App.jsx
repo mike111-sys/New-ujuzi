@@ -20,7 +20,7 @@ const AppContent = ({ isDarkMode, setIsDarkMode }) => {
     setIsLoading(true);
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 1000); // Simulate a 1-second loading time
+    }, 1500); // Simulate a 1-second loading time
 
     return () => clearTimeout(timer);
   }, [location.pathname]);

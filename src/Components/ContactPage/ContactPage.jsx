@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
-  FaUser, FaEnvelope, FaClipboardList, FaComment, FaPaperPlane 
+  FaUser, FaEnvelope, FaPhone, FaClipboardList, FaComment, FaPaperPlane 
 } from 'react-icons/fa';
-import contactImage from '/src/assets/contact-image.jpg';
+import contactImage from '/src/assets/contact-image.jpeg';
 import patternDark from '/src/assets/dark-pattern.jpg';
 import patternLight from '/src/assets/light-pattern.jpg';
 
@@ -13,6 +13,7 @@ const ContactPage = ({ isDarkMode: propDarkMode }) => {
       ? propDarkMode 
       : document.documentElement.classList.contains('dark-mode')
   );
+  const [result, setResult] = useState("");
 
   // Sync with prop changes
   useEffect(() => {
@@ -36,6 +37,35 @@ const ContactPage = ({ isDarkMode: propDarkMode }) => {
 
     return () => observer.disconnect();
   }, [propDarkMode]);
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    setResult("Sending...");
+    
+    try {
+      const formData = new FormData(event.target);
+      formData.append("access_key", "6d349fce-d9fd-4aa2-a71c-7bf254b3cad0");
+  
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+  
+      const data = await response.json();
+  
+      if (data.success) {
+        setResult("Form Submitted Successfully! Our team will respond to you within 24 hours");
+        event.target.reset();
+      } else {
+        console.error("Submission error:", data);
+        setResult(data.message || "Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+      setResult("Network error. Please check your connection.");
+    }
+  };
+
 
   return (
     <motion.div
@@ -95,7 +125,7 @@ const ContactPage = ({ isDarkMode: propDarkMode }) => {
             Fill out the form and our team will get back to you within 24 hours
           </p>
 
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={onSubmit}>
             {/* Name Field */}
             <div>
               <label className={`flex items-center mb-2 transition-colors duration-300 ${
@@ -108,6 +138,7 @@ const ContactPage = ({ isDarkMode: propDarkMode }) => {
               </label>
               <input
                 type="text"
+                name="name"
                 className={`w-full px-4 py-3 rounded-lg border transition-colors duration-300 ${
                   isDarkMode
                     ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400'
@@ -130,6 +161,7 @@ const ContactPage = ({ isDarkMode: propDarkMode }) => {
               </label>
               <input
                 type="email"
+                name="email"
                 className={`w-full px-4 py-3 rounded-lg border transition-colors duration-300 ${
                   isDarkMode
                     ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400'
@@ -137,6 +169,30 @@ const ContactPage = ({ isDarkMode: propDarkMode }) => {
                 }`}
                 placeholder="Enter Your Email"
                 required
+              />
+            </div>
+
+            {/* Phone Number Field - New Addition */}
+            <div>
+              <label className={`flex items-center mb-2 transition-colors duration-300 ${
+                isDarkMode ? 'text-gray-300' : 'text-gray-700'
+              }`}>
+                <FaPhone className={`mr-2 transition-colors duration-300 ${
+                  isDarkMode ? 'text-blue-400' : 'text-blue-600'
+                }`} />
+                Phone Number
+              </label>
+              <input
+                type="tel"
+                name="phone"
+                className={`w-full px-4 py-3 rounded-lg border transition-colors duration-300 ${
+                  isDarkMode
+                    ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400'
+                    : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500'
+                }`}
+                placeholder="Enter Your Phone Number"
+                pattern="[0-9]{10,15}"
+                title="Please enter a valid phone number (10-15 digits)"
               />
             </div>
 
@@ -151,6 +207,7 @@ const ContactPage = ({ isDarkMode: propDarkMode }) => {
                 Service Needed
               </label>
               <select
+                name="service"
                 className={`w-full px-4 py-3 rounded-lg border transition-colors duration-300 ${
                   isDarkMode
                     ? 'bg-gray-700 border-gray-600 text-white'
@@ -177,6 +234,7 @@ const ContactPage = ({ isDarkMode: propDarkMode }) => {
                 Project Details
               </label>
               <textarea
+                name="message"
                 className={`w-full px-4 py-3 rounded-lg border transition-colors duration-300 ${
                   isDarkMode
                     ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400'
@@ -187,6 +245,15 @@ const ContactPage = ({ isDarkMode: propDarkMode }) => {
                 required
               ></textarea>
             </div>
+
+            {/* Display result message */}
+            {result && (
+              <p className={`text-center ${
+                isDarkMode ? 'text-blue-400' : 'text-blue-600'
+              }`}>
+                {result}
+              </p>
+            )}
 
             {/* Submit Button */}
             <motion.button

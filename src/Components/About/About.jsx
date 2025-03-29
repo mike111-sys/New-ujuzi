@@ -19,12 +19,41 @@ const About = () => {
     document.documentElement.classList.contains("dark-mode")
   );
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Thank you for your order! We will contact you shortly.");
-    setIsModalOpen(false);
+
+  const [result, setResult] = useState("");
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    setResult("Sending...");
+    
+    try {
+      const formData = new FormData(event.target);
+      formData.append("access_key", "6d349fce-d9fd-4aa2-a71c-7bf254b3cad0");
+  
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+  
+      const data = await response.json();
+  
+      if (data.success) {
+        setResult("Message submitted successfully! We'll contact you soon.");
+        event.target.reset();
+      } else {
+        console.error("Submission error:", data);
+        setResult(data.message || "Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+      setResult("Network error. Please check your connection.");
+    }
   };
+
+
+
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+ 
 
   useEffect(() => {
     const observer = new MutationObserver(() => {
@@ -45,8 +74,7 @@ const About = () => {
     visible: {
       opacity: 1,
       transition: {
-        delay: 0.5,
-        staggerChildren: 0.3,
+        staggerChildren: 0.2,
         when: "beforeChildren",
       },
     },
@@ -114,19 +142,8 @@ const About = () => {
       image: vincentKoech,
       accentColor: "purple",
     },
-   
     {
       id: 3,
-      name: "John Muchuku",
-      role: "Frontend Architect",
-      bio: "Dedicated Frontend web developer specializing in React, Next.js and Vite. Creates pixel-perfect UIs with 3+ years experience building responsive web applications.",
-      skills: ["React", "Next.js", "Vite", "TypeScript", "Tailwind"],
-      image: johnMuchuku,
-      accentColor: "blue",
-    },
-
-    {
-      id: 4,
       name: "Levis Rabah",
       role: "Python & JS Wizard",
       bio: "Full Stack web developer using Python and JavaScript. Builds AI-powered applications and loves solving complex problems with clean, maintainable code.",
@@ -134,7 +151,15 @@ const About = () => {
       image: levisRabah,
       accentColor: "yellow",
     },
-
+    {
+      id: 4,
+      name: "John Muchuku",
+      role: "Frontend Architect",
+      bio: "Dedicated Frontend web developer specializing in React, Next.js and Vite. Creates pixel-perfect UIs with 3+ years experience building responsive web applications.",
+      skills: ["React", "Next.js", "Vite", "TypeScript", "Tailwind"],
+      image: johnMuchuku,
+      accentColor: "blue",
+    },
     {
       id: 5,
       name: "George Ochieng",
@@ -187,133 +212,163 @@ const About = () => {
   };
 
   return (
-    <motion.div
-      className={`${backgroundColor} min-h-screen mt-7 py-16 px-4 sm:px-6 lg:px-8`}
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-    >
+    <div className={`${backgroundColor} min-h-screen mt-7 py-16 px-4 sm:px-6 lg:px-8`}>
       <div className="max-w-7xl mx-auto">
-        {/* Heading */}
-        <motion.h1
-          className={`text-4xl sm:text-5xl lg:text-6xl font-bold text-center mb-12 ${textColor}`}
-          variants={itemVariants}
+        {/* Title Section */}
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="text-center mb-16"
         >
-          About Ujuzi Digital Creations
-        </motion.h1>
+          <motion.h1
+            className={`text-4xl sm:text-5xl lg:text-6xl font-bold mb-12 ${textColor}`}
+            variants={itemVariants}
+          >
+            About Ujuzi Digital Creations
+          </motion.h1>
+        </motion.section>
 
         {/* Mission Section */}
-        <motion.div className="mb-16 text-center" variants={itemVariants}>
-          <motion.h2
-            className={`text-3xl font-bold mb-6 ${textColor}`}
-            variants={itemVariants}
-          >
-            Our Mission
-          </motion.h2>
-          <motion.p
-            className={`text-lg max-w-2xl mx-auto ${cardTextColor}`}
-            variants={itemVariants}
-          >
-            At Ujuzi Digital Creations, our mission is to empower businesses and
-            individuals with innovative digital solutions that drive growth,
-            creativity, and success. We believe in the transformative power of
-            technology and design to make a meaningful impact.
-          </motion.p>
-        </motion.div>
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="mb-16"
+        >
+          <motion.div className="text-center" variants={itemVariants}>
+            <motion.h2
+              className={`text-3xl font-bold mb-6 ${textColor}`}
+              variants={itemVariants}
+            >
+              Our Mission
+            </motion.h2>
+            <motion.p
+              className={`text-lg max-w-2xl mx-auto ${cardTextColor}`}
+              variants={itemVariants}
+            >
+              At Ujuzi Digital Creations, our mission is to empower businesses and
+              individuals with innovative digital solutions that drive growth,
+              creativity, and success. We believe in the transformative power of
+              technology and design to make a meaningful impact.
+            </motion.p>
+          </motion.div>
+        </motion.section>
 
         {/* Values Section */}
-        <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16"
+        <motion.section
           variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="mb-16"
         >
-          {/* Innovation */}
-          <motion.div
-            className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
+          <motion.h2
+            className={`text-3xl font-bold mb-12 text-center ${textColor}`}
             variants={itemVariants}
-            whileHover={{ y: -5 }}
           >
-            <motion.div 
-              whileHover={{ scale: 1.1 }}
-              className="flex justify-center"
-            >
-              <FaLightbulb className="text-6xl text-yellow-500 mb-4" />
-            </motion.div>
-            <h3 className={`text-xl font-semibold mb-2 ${textColor}`}>
-              Innovation
-            </h3>
-            <p className={cardTextColor}>
-              We constantly push boundaries to deliver cutting-edge solutions
-              that set you apart.
-            </p>
-          </motion.div>
-
-          {/* Integrity */}
+            Our Values
+          </motion.h2>
           <motion.div
-            className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
-            variants={itemVariants}
-            whileHover={{ y: -5 }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+            variants={containerVariants}
           >
-            <motion.div 
-              whileHover={{ scale: 1.1 }}
-              className="flex justify-center"
+            {/* Innovation */}
+            <motion.div
+              className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
+              variants={itemVariants}
+              whileHover={{ y: -5 }}
             >
-              <FaHandshake className="text-6xl text-blue-500 mb-4" />
+              <motion.div 
+                whileHover={{ scale: 1.1 }}
+                className="flex justify-center"
+              >
+                <FaLightbulb className="text-6xl text-yellow-500 mb-4" />
+              </motion.div>
+              <h3 className={`text-xl font-semibold mb-2 ${textColor}`}>
+                Innovation
+              </h3>
+              <p className={cardTextColor}>
+                We constantly push boundaries to deliver cutting-edge solutions
+                that set you apart.
+              </p>
             </motion.div>
-            <h3 className={`text-xl font-semibold mb-2 ${textColor}`}>
-              Integrity
-            </h3>
-            <p className={cardTextColor}>
-              We build trust through transparency, honesty, and ethical
-              practices.
-            </p>
-          </motion.div>
 
-          {/* Collaboration */}
-          <motion.div
-            className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
-            variants={itemVariants}
-            whileHover={{ y: -5 }}
-          >
-            <motion.div 
-              whileHover={{ scale: 1.1 }}
-              className="flex justify-center"
+            {/* Integrity */}
+            <motion.div
+              className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
+              variants={itemVariants}
+              whileHover={{ y: -5 }}
             >
-              <FaUsers className="text-6xl text-purple-500 mb-4" />
+              <motion.div 
+                whileHover={{ scale: 1.1 }}
+                className="flex justify-center"
+              >
+                <FaHandshake className="text-6xl text-blue-500 mb-4" />
+              </motion.div>
+              <h3 className={`text-xl font-semibold mb-2 ${textColor}`}>
+                Integrity
+              </h3>
+              <p className={cardTextColor}>
+                We build trust through transparency, honesty, and ethical
+                practices.
+              </p>
             </motion.div>
-            <h3 className={`text-xl font-semibold mb-2 ${textColor}`}>
-              Collaboration
-            </h3>
-            <p className={cardTextColor}>
-              We work closely with you to ensure your vision becomes a reality.
-            </p>
-          </motion.div>
 
-          {/* Community Impact */}
-          <motion.div
-            className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
-            variants={itemVariants}
-            whileHover={{ y: -5 }}
-          >
-            <motion.div 
-              whileHover={{ scale: 1.1 }}
-              className="flex justify-center"
+            {/* Collaboration */}
+            <motion.div
+              className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
+              variants={itemVariants}
+              whileHover={{ y: -5 }}
             >
-              <FaGlobeAfrica className="text-6xl text-green-500 mb-4" />
+              <motion.div 
+                whileHover={{ scale: 1.1 }}
+                className="flex justify-center"
+              >
+                <FaUsers className="text-6xl text-purple-500 mb-4" />
+              </motion.div>
+              <h3 className={`text-xl font-semibold mb-2 ${textColor}`}>
+                Collaboration
+              </h3>
+              <p className={cardTextColor}>
+                We work closely with you to ensure your vision becomes a reality.
+              </p>
             </motion.div>
-            <h3 className={`text-xl font-semibold mb-2 ${textColor}`}>
-              Community Impact
-            </h3>
-            <p className={cardTextColor}>
-              We are committed to making a positive difference in our local and
-              global communities.
-            </p>
-          </motion.div>
-        </motion.div>
 
-        {/* Enhanced Team Section */}
-        <motion.div className="mb-16" variants={itemVariants}>
-          <motion.div className="text-center mb-12">
+            {/* Community Impact */}
+            <motion.div
+              className={`p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ${cardBackgroundColor}`}
+              variants={itemVariants}
+              whileHover={{ y: -5 }}
+            >
+              <motion.div 
+                whileHover={{ scale: 1.1 }}
+                className="flex justify-center"
+              >
+                <FaGlobeAfrica className="text-6xl text-green-500 mb-4" />
+              </motion.div>
+              <h3 className={`text-xl font-semibold mb-2 ${textColor}`}>
+                Community Impact
+              </h3>
+              <p className={cardTextColor}>
+                We are committed to making a positive difference in our local and
+                global communities.
+              </p>
+            </motion.div>
+          </motion.div>
+        </motion.section>
+
+        {/* Team Section */}
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="mb-16"
+        >
+          <motion.div className="text-center mb-12" variants={itemVariants}>
             <motion.h2
               className={`text-3xl font-bold mb-4 ${textColor}`}
               variants={itemVariants}
@@ -390,10 +445,16 @@ const About = () => {
               );
             })}
           </motion.div>
-        </motion.div>
+        </motion.section>
 
-        {/* Call to Action */}
-        <motion.div className="text-center" variants={itemVariants}>
+        {/* CTA Section */}
+        <motion.section
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="text-center"
+        >
           <motion.h2
             className={`text-3xl font-bold mb-6 ${textColor}`}
             variants={itemVariants}
@@ -413,12 +474,13 @@ const About = () => {
             onClick={() => setIsModalOpen(true)}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            variants={itemVariants}
           >
             Get in Touch
           </motion.button>
-        </motion.div>
+        </motion.section>
 
-        {/* Modal for Ordering Services */}
+        {/* Modal */}
         {isModalOpen && (
           <motion.div
             className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
@@ -442,59 +504,68 @@ const About = () => {
               <h2 className={`text-2xl font-bold mb-6 ${textColor}`}>
                 Get In Touch
               </h2>
-              <form onSubmit={handleSubmit}>
-                <motion.div className="mb-4" variants={itemVariants}>
-                  <label
-                    className={`block text-sm font-medium mb-2 ${textColor}`}
-                  >
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    className={`w-full p-2 rounded-lg ${cardBackgroundColor} border ${cardTextColor}`}
-                    placeholder="Enter your name"
-                  />
-                </motion.div>
-                <motion.div className="mb-4" variants={itemVariants}>
-                  <label
-                    className={`block text-sm font-medium mb-2 ${textColor}`}
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    required
-                    className={`w-full p-2 rounded-lg ${cardBackgroundColor} border ${cardTextColor}`}
-                    placeholder="Enter your email"
-                  />
-                </motion.div>
-                <motion.div className="mb-6" variants={itemVariants}>
-                  <label
-                    className={`block text-sm font-medium mb-2 ${textColor}`}
-                  >
-                    Message
-                  </label>
-                  <textarea
-                    className={`w-full p-2 rounded-lg ${cardBackgroundColor} border ${cardTextColor}`}
-                    rows="4"
-                    placeholder="Describe your requirements"
-                  ></textarea>
-                </motion.div>
-                <motion.button
-                  type="submit"
-                  className="bg-blue-600 cursor-pointer text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Submit
-                </motion.button>
-              </form>
+              <form onSubmit={onSubmit}>
+  <motion.div className="mb-4" variants={itemVariants}>
+    <label className={`block text-sm font-medium mb-2 ${textColor}`}>
+      Name
+    </label>
+    <input
+      type="text"
+      name="name"
+      required
+      className={`w-full p-2 rounded-lg ${cardBackgroundColor} border ${cardTextColor}`}
+      placeholder="Enter your name"
+    />
+  </motion.div>
+  
+  <motion.div className="mb-4" variants={itemVariants}>
+    <label className={`block text-sm font-medium mb-2 ${textColor}`}>
+      Email
+    </label>
+    <input
+      type="email"
+      name="email"
+      required
+      className={`w-full p-2 rounded-lg ${cardBackgroundColor} border ${cardTextColor}`}
+      placeholder="Enter your email"
+    />
+  </motion.div>
+  
+  <motion.div className="mb-6" variants={itemVariants}>
+    <label className={`block text-sm font-medium mb-2 ${textColor}`}>
+      Message
+    </label>
+    <textarea
+      name="message"
+      className={`w-full p-2 rounded-lg ${cardBackgroundColor} border ${cardTextColor}`}
+      rows="4"
+      placeholder="Describe your requirements"
+      required
+    ></textarea>
+  </motion.div>
+
+  {result && (
+    <p className={`mb-4 text-center ${
+      isDarkMode ? "text-blue-300" : "text-blue-600"
+    }`}>
+      {result}
+    </p>
+  )}
+
+  <motion.button
+    type="submit"
+    className="bg-blue-600 cursor-pointer text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300"
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+  >
+    Submit
+  </motion.button>
+</form>
             </motion.div>
           </motion.div>
         )}
       </div>
-    </motion.div>
+    </div>
   );
 };
 

@@ -18,7 +18,6 @@ const Reviews = () => {
     document.documentElement.classList.contains('dark-mode')
   );
 
-  // Observe changes to the dark-mode class
   useEffect(() => {
     const observer = new MutationObserver(() => {
       setIsDarkMode(document.documentElement.classList.contains('dark-mode'));
@@ -32,7 +31,6 @@ const Reviews = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Framer Motion variants for animations
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -54,7 +52,6 @@ const Reviews = () => {
     },
   };
 
-  // Dynamic styles based on dark mode
   const backgroundColor = isDarkMode
     ? 'bg-gradient-to-r from-gray-900 to-gray-800'
     : 'bg-gradient-to-r from-blue-50 to-purple-50';
@@ -62,114 +59,122 @@ const Reviews = () => {
   const cardBackgroundColor = isDarkMode ? 'bg-gray-800' : 'bg-white';
   const cardTextColor = isDarkMode ? 'text-gray-200' : 'text-gray-600';
 
-  // Testimonials data
   const testimonials = [
+    // Pure English reviews
     {
-      name: 'Jane Doe',
-      role: 'CEO, XYZ Company',
-      review:
-        'Ujuzi Digital Creations transformed our online presence. Their team is professional, creative, and results-driven!',
-      icon: <FaUser className="text-4xl text-blue-500 mx-auto mb-4" />,
-    },
-    {
-      name: 'John Smith',
-      role: 'Marketing Director',
-      review:
-        'The video editing services were top-notch. Our brand story has never been more compelling!',
+      name: 'Elizabeth Wambui',
+      role: 'Tech Startup CEO',
+      review: 'Ujuzi Digital built our entire tech stack from scratch. Their developers are incredibly skilled - worth every shilling! ⚡',
       icon: <FaUserTie className="text-4xl text-purple-500 mx-auto mb-4" />,
+      stars: 5
     },
     {
-      name: 'Mary Johnson',
-      role: 'Founder, ABC Startup',
-      review:
-        'Their digital marketing strategies have significantly increased our online engagement. Highly recommend!',
-      icon: <FaUserGraduate className="text-4xl text-pink-500 mx-auto mb-4" />,
+      name: 'Dr. James Mwangi',
+      role: 'Healthcare Consultant',
+      review: 'Professional medical animation that made complex procedures easy to understand. Exceeded our expectations.',
+      icon: <FaUserGraduate className="text-4xl text-blue-500 mx-auto mb-4" />,
+      stars: 4.5
     },
     {
-      name: 'Alex Kim',
-      role: 'Entrepreneur',
-      review:
-        'Ujuzi’s web design team is phenomenal! They delivered a website that exceeded our expectations.',
-      icon: <FaUserNinja className="text-4xl text-green-500 mx-auto mb-4" />,
-    },
-    {
-      name: 'Sarah Lee',
-      role: 'Creative Director',
-      review:
-        'The graphic designs created by Ujuzi are simply stunning. They perfectly captured our brand identity.',
-      icon: <FaUserAstronaut className="text-4xl text-red-500 mx-auto mb-4" />,
-    },
-    {
-      name: 'Michael Brown',
-      role: 'Business Owner',
-      review:
-        'Ujuzi’s team is incredibly talented and easy to work with. They truly understand our needs.',
-      icon: <FaUserSecret className="text-4xl text-yellow-500 mx-auto mb-4" />,
-    },
-    {
-      name: 'Emily Davis',
-      role: 'E-Commerce Manager',
-      review:
-        'Their e-commerce solutions are top-tier. Our online store has seen a significant boost in sales!',
-      icon: <FaUser className="text-4xl text-indigo-500 mx-auto mb-4" />,
-    },
-    {
-      name: 'David Wilson',
-      role: 'IT Consultant',
-      review:
-        'Ujuzi’s API integration services are seamless and efficient. They made our systems work flawlessly.',
-      icon: <FaUserTie className="text-4xl text-teal-500 mx-auto mb-4" />,
-    },
-    {
-      name: 'Laura Martinez',
-      role: 'Event Planner',
-      review:
-        'The event coverage videos were breathtaking. Ujuzi captured every moment perfectly!',
-      icon: <FaUserGraduate className="text-4xl text-orange-500 mx-auto mb-4" />,
-    },
-    {
-      name: 'Chris Evans',
-      role: 'Fitness Trainer',
-      review:
-        'Ujuzi’s branding for our gym was outstanding. Our members love the new look!',
-      icon: <FaUserNinja className="text-4xl text-blue-500 mx-auto mb-4" />,
-    },
-    {
-      name: 'Sophia Garcia',
-      role: 'Artist',
-      review:
-        'The illustrations created by Ujuzi brought my vision to life. I couldn’t be happier!',
-      icon: <FaUserAstronaut className="text-4xl text-purple-500 mx-auto mb-4" />,
-    },
-    {
-      name: 'Daniel White',
-      role: 'Restaurant Owner',
-      review:
-        'Ujuzi’s social media campaigns have brought in so many new customers. Highly recommend their services!',
+      name: 'Sarah Johnson',
+      role: 'International School Principal',
+      review: 'The e-learning platform they developed has transformed our teaching methods. Highly recommend their services!',
       icon: <FaUserSecret className="text-4xl text-pink-500 mx-auto mb-4" />,
+      stars: 5
     },
+  
+    // Swahili-English blended reviews
     {
-      name: 'Olivia Harris',
-      role: 'Author',
-      review:
-        'Ujuzi’s book cover designs are stunning. They perfectly captured the essence of my story.',
+      name: 'Mama Nia',
+      role: 'Mama Fua Business',
+      review: 'Nilikuwa sina social media presence... Sasa customers wananiita kila siku! Asante Ujuzi! 🙌',
       icon: <FaUser className="text-4xl text-green-500 mx-auto mb-4" />,
+      stars: 4.5
     },
     {
-      name: 'James Clark',
-      role: 'Tech Startup Founder',
-      review:
-        'Ujuzi’s digital marketing strategies have helped us scale our business rapidly. Thank you!',
-      icon: <FaUserTie className="text-4xl text-red-500 mx-auto mb-4" />,
+      name: 'Babu Omollo',
+      role: 'Retired Teacher',
+      review: 'At 68 years, I needed simple website for my memoirs. These young people were very patient with me 👍',
+      icon: <FaUserAstronaut className="text-4xl text-orange-500 mx-auto mb-4" />,
+      stars: 4
+    },
+  
+    // Pure English
+    {
+      name: 'David Peterson',
+      role: 'Tour Company Owner',
+      review: 'Our new booking system works flawlessly. The team delivered ahead of schedule with excellent documentation.',
+      icon: <FaUserNinja className="text-4xl text-red-500 mx-auto mb-4" />,
+      stars: 5
     },
     {
-      name: 'Emma Lewis',
-      role: 'Fashion Designer',
-      review:
-        'Ujuzi’s branding for my fashion line is impeccable. They truly understand the industry.',
+      name: 'Grace Atieno',
+      role: 'Fashion Boutique Owner',
+      review: 'The product photography elevated my brand instantly. My Instagram engagement tripled in a month! 📸',
       icon: <FaUserGraduate className="text-4xl text-yellow-500 mx-auto mb-4" />,
+      stars: 4.5
     },
+  
+    // Swahili-English
+    {
+      name: 'Juma wa Mitumba',
+      role: 'Clothing Vendor',
+      review: 'Hii system ya inventory walonifanyia inasaidia sana! Sasa najua exactly nini niko nayo dukani. 👕👖',
+      icon: <FaUserTie className="text-4xl text-teal-500 mx-auto mb-4" />,
+      stars: 4
+    },
+    {
+      name: 'Njeri wa Salon',
+      role: 'Hair Stylist',
+      review: 'My booking app is life-changing! No more missed appointments. Clients love the convenience too 💇‍♀️',
+      icon: <FaUser className="text-4xl text-indigo-500 mx-auto mb-4" />,
+      stars: 5
+    },
+  
+    // Pure English
+    {
+      name: 'Professor Wangari',
+      role: 'University Lecturer',
+      review: 'The research data visualization tools they created have been invaluable for my academic publications.',
+      icon: <FaUserSecret className="text-4xl text-purple-500 mx-auto mb-4" />,
+      stars: 4.5
+    },
+    {
+      name: 'Mike Otieno',
+      role: 'Music Producer',
+      review: 'My artist website gets me serious gigs! The portfolio presentation is sleek and professional.',
+      icon: <FaUserNinja className="text-4xl text-blue-500 mx-auto mb-4" />,
+      stars: 5
+    }
   ];
+
+  const renderStars = (rating) => {
+    const stars = [];
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 !== 0;
+    
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(<FaStar key={`full-${i}`} className="text-yellow-500" />);
+    }
+    
+    if (hasHalfStar) {
+      stars.push(
+        <div key="half-star" className="relative inline-block">
+          <FaStar className="text-gray-300" />
+          <div className="absolute top-0 left-0 w-1/2 overflow-hidden">
+            <FaStar className="text-yellow-500" />
+          </div>
+        </div>
+      );
+    }
+    
+    const emptyStars = 5 - stars.length;
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push(<FaStar key={`empty-${i}`} className="text-gray-300" />);
+    }
+    
+    return stars;
+  };
 
   return (
     <motion.div
@@ -180,7 +185,6 @@ const Reviews = () => {
       viewport={{ once: true }}
     >
       <div className="max-w-7xl mx-auto">
-        {/* Heading */}
         <motion.h1
           className={`text-4xl sm:text-5xl lg:text-6xl font-bold text-center mb-12 ${textColor}`}
           variants={itemVariants}
@@ -188,7 +192,6 @@ const Reviews = () => {
           What Our Clients Say
         </motion.h1>
 
-        {/* Testimonials Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
             <motion.div
@@ -203,24 +206,22 @@ const Reviews = () => {
                 <FaQuoteRight className="text-2xl text-gray-400 mx-auto mb-4" />
                 <h3 className={`text-xl font-semibold mb-2 ${textColor}`}>{testimonial.name}</h3>
                 <p className={`text-sm text-gray-500`}>{testimonial.role}</p>
-                <div className="flex justify-center mt-4">
-                  {[...Array(5)].map((_, i) => (
-                    <FaStar key={i} className="text-yellow-500" />
-                  ))}
+                <div className="flex justify-center mt-4 space-x-1">
+                  {renderStars(testimonial.stars)}
+                  <span className="ml-2 text-sm text-gray-500">({testimonial.stars})</span>
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
 
-        {/* Call to Action */}
         <motion.div
           className="text-center mt-16"
           variants={itemVariants}
         >
           <h2 className={`text-3xl font-bold mb-6 ${textColor}`}>Ready to Transform Your Business?</h2>
           <p className={`text-lg mb-8 ${cardTextColor}`}>
-            Let’s work together to create something extraordinary. Contact us today!
+            Let's work together to create something extraordinary. Contact us today!
           </p>
           <button
             className="bg-blue-600 cursor-pointer text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300"

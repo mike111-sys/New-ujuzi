@@ -25,6 +25,8 @@ import {
   FaRegSmile,
   FaRegLightbulb,
   FaTimes,
+  FaSpinner,
+  FaPaperPlane
 } from 'react-icons/fa';
 
 const Services = () => {
@@ -46,6 +48,45 @@ const Services = () => {
 
     return () => observer.disconnect();
   }, []);
+
+const [result, setResult] = useState("");
+const [isSubmitting, setIsSubmitting] = useState(false);
+const onSubmit = async (event) => {
+  event.preventDefault();
+  setIsSubmitting(true);
+  setResult("Sending your request...");
+  
+  try {
+    const formData = new FormData(event.target);
+    formData.append("access_key", "6d349fce-d9fd-4aa2-a71c-7bf254b3cad0");
+    
+    // Add additional form data
+    formData.append("subject", "New Service Request");
+    formData.append("from_name", "Ujuzi Digital Services Form");
+
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      setResult("Thank you! We've received your request and we will contact you within 24 hours.");
+      event.target.reset();
+    } else {
+      console.error("Submission error:", data);
+      setResult(data.message || "Failed to send your request. Please try again.");
+    }
+  } catch (error) {
+    console.error("Network error:", error);
+    setResult("Network error. Please check your connection and try again.");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
+
 
   // Framer Motion variants for animations
   const containerVariants = {
@@ -77,13 +118,7 @@ const Services = () => {
   const cardBackgroundColor = isDarkMode ? 'bg-gray-800' : 'bg-white';
   const cardTextColor = isDarkMode ? 'text-gray-200' : 'text-gray-600';
 
-  // Function to handle form submission
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('Thank you for your order! We will contact you shortly.');
-    setIsModalOpen(false); // Close the modal after submission
-  };
-
+  
   return (
     <motion.div
       className={`${backgroundColor} mt-7 min-h-screen py-16 px-4 sm:px-6 lg:px-8`}
@@ -488,75 +523,160 @@ const Services = () => {
 
         {/* Modal for Ordering Services */}
         {isModalOpen && (
-          <motion.div
-            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+  <motion.div
+    className="fixed inset-0 flex items-start justify-center bg-black bg-opacity-50 z-50 overflow-y-auto py-8"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+  >
+    <motion.div
+      className={`relative ${cardBackgroundColor} rounded-lg p-6 w-full max-w-md my-8 mx-4`}
+      initial={{ y: -20, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: -20, opacity: 0 }}
+      style={{
+        maxHeight: "90vh",
+        overflowY: "auto"
+      }}
+    >
+      {/* Close Button - Fixed at top-right */}
+      <button
+        onClick={() => {
+          setIsModalOpen(false);
+          setResult("");
+        }}
+        className="absolute top-4 right-4 cursor-pointer p-2 rounded-full hover:bg-gray-200 hover:dark:bg-gray-700 transition-colors"
+        disabled={isSubmitting}
+      >
+        <FaTimes className="text-xl text-gray-600 dark:text-gray-300" />
+      </button>
+
+      <h2 className={`text-2xl font-bold mb-6 ${textColor} pr-8`}>
+        Request Our Services
+      </h2>
+
+      <form onSubmit={onSubmit} className="space-y-4">
+        {/* Name Field */}
+        <div>
+          <label className={`block text-sm font-medium mb-1 ${textColor}`}>
+            Full Name <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="text"
+            name="name"
+            required
+            className={`w-full p-3 rounded-lg ${cardBackgroundColor} border ${
+              isDarkMode ? "border-gray-700" : "border-gray-300"
+            } ${cardTextColor} focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+            placeholder="Your name"
+            disabled={isSubmitting}
+          />
+        </div>
+
+        {/* Email Field */}
+        <div>
+          <label className={`block text-sm font-medium mb-1 ${textColor}`}>
+            Email Address <span className="text-red-500">*</span>
+          </label>
+          <input
+            type="email"
+            name="email"
+            required
+            className={`w-full p-3 rounded-lg ${cardBackgroundColor} border ${
+              isDarkMode ? "border-gray-700" : "border-gray-300"
+            } ${cardTextColor} focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+            placeholder="your.email@example.com"
+            disabled={isSubmitting}
+          />
+        </div>
+
+        {/* Phone Field */}
+        <div>
+          <label className={`block text-sm font-medium mb-1 ${textColor}`}>
+            Phone Number
+          </label>
+          <input
+            type="tel"
+            name="phone"
+            className={`w-full p-3 rounded-lg ${cardBackgroundColor} border ${
+              isDarkMode ? "border-gray-700" : "border-gray-300"
+            } ${cardTextColor} focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+            placeholder="+254 700 000000"
+            disabled={isSubmitting}
+          />
+        </div>
+
+        {/* Service Selection */}
+        <div>
+          <label className={`block text-sm font-medium mb-1 ${textColor}`}>
+            Service Needed <span className="text-red-500">*</span>
+          </label>
+          <select
+            name="service"
+            required
+            className={`w-full p-3 rounded-lg ${cardBackgroundColor} border ${
+              isDarkMode ? "border-gray-700" : "border-gray-300"
+            } ${cardTextColor} focus:ring-2 focus:ring-blue-500 focus:border-transparent appearance-none bg-[url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9ImN1cnJlbnRDb2xvciIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIGNsYXNzPSJsdWNpZGUgbHVjaWRlLWNoZXZyb24tZG93biI+PHBhdGggZD0ibTYgOSA2IDYgNi02Ii8+PC9zdmc+")] bg-no-repeat bg-[position:right_0.75rem_center] bg-[size:1rem]`}
+            disabled={isSubmitting}
           >
-            <motion.div
-              className={`${cardBackgroundColor} rounded-lg p-8 w-full max-w-md relative`}
-              initial={{ y: -50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -50, opacity: 0 }}
-            >
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="absolute cursor-pointer top-4 right-4 text-gray-500 hover:text-gray-700"
-              >
-                <FaTimes className="text-2xl" />
-              </button>
-              <h2 className={`text-2xl font-bold mb-6 ${textColor}`}>Order Services</h2>
-              <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                  <label className={`block text-sm font-medium mb-2 ${textColor}`}>Name</label>
-                  <input
-                    type="text"
-                    required
-                    className={`w-full p-2 rounded-lg ${cardBackgroundColor} border ${cardTextColor}`}
-                    placeholder="Enter your name"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className={`block text-sm font-medium mb-2 ${textColor}`}>Email</label>
-                  <input
-                    type="email"
-                    required
-                    className={`w-full p-2 rounded-lg ${cardBackgroundColor} border ${cardTextColor}`}
-                    placeholder="Enter your email"
-                  />
-                </div>
-                <div className="mb-4">
-                  <label className={`block text-sm font-medium mb-2 ${textColor}`}>Service</label>
-                  <select
-                    required
-                    className={`w-full p-2 rounded-lg ${cardBackgroundColor} border ${cardTextColor}`}
-                  >
-                    <option value="">Select a service</option>
-                    <option value="web-development">Web Development</option>
-                    <option value="video-editing">Video Editing</option>
-                    <option value="graphics-design">Graphics Design</option>
-                    <option value="digital-marketing">Digital Marketing</option>
-                  </select>
-                </div>
-                <div className="mb-6">
-                  <label className={`block text-sm font-medium mb-2 ${textColor}`}>Message</label>
-                  <textarea
-                    className={`w-full p-2 rounded-lg ${cardBackgroundColor} border ${cardTextColor}`}
-                    rows="4"
-                    placeholder="Describe your requirements"
-                  ></textarea>
-                </div>
-                <button
-                  type="submit"
-                  className="bg-blue-600 cursor-pointer text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300"
-                >
-                  Submit
-                </button>
-              </form>
-            </motion.div>
-          </motion.div>
+            <option value="">-- Select a service --</option>
+            <option value="web-development">Web Development</option>
+            <option value="video-editing">Video Editing</option>
+            <option value="graphics-design">Graphics Design</option>
+            <option value="digital-marketing">Digital Marketing</option>
+            <option value="multiple-services">Multiple Services</option>
+          </select>
+        </div>
+
+        {/* Project Details */}
+        <div>
+          <label className={`block text-sm font-medium mb-1 ${textColor}`}>
+            Project Details <span className="text-red-500">*</span>
+          </label>
+          <textarea
+            name="message"
+            required
+            className={`w-full p-3 rounded-lg ${cardBackgroundColor} border ${
+              isDarkMode ? "border-gray-700" : "border-gray-300"
+            } ${cardTextColor} focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+            rows={4}
+            placeholder="Tell us about your project, timeline, and budget..."
+            disabled={isSubmitting}
+          ></textarea>
+        </div>
+
+        {/* Result Message */}
+        {result && (
+          <div className={`p-3 rounded-lg ${
+            result.includes("Thank you") 
+              ? "bg-green-100/80 text-green-800 border border-green-200" 
+              : "bg-blue-100/80 text-blue-800 border border-blue-200"
+          }`}>
+            {result}
+          </div>
         )}
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className={`w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors ${
+            isSubmitting ? "opacity-80 cursor-not-allowed" : ""
+          }`}
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? (
+            <>
+              <FaSpinner className="animate-spin" />
+              Processing...
+            </>
+          ) : (
+            "Submit Request"
+          )}
+        </button>
+      </form>
+    </motion.div>
+  </motion.div>
+)}
       </div>
     </motion.div>
   );
