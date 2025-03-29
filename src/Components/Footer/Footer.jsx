@@ -92,18 +92,16 @@ const navigate = useNavigate();
         >
           <h3 className="text-lg font-semibold text-yellow-400">Follow Us</h3>
           <div className="flex justify-center md:justify-start space-x-4 mt-3">
-            <a href="#" className="text-blue-600 hover:scale-110 transition">
+            <a href="https://www.facebook.com/profile.php?id=61571433415716" className="text-blue-600 hover:scale-110 transition">
               <FaFacebook size={24} />
             </a>
-            <a href="#" className="text-sky-400 hover:scale-110 transition">
               <FaTwitter size={24} />
-            </a>
-            <a href="#" className="text-pink-500 hover:scale-110 transition">
+           
               <FaInstagram size={24} />
-            </a>
-            <a href="#" className="text-blue-700 hover:scale-110 transition">
+           
+           
               <FaLinkedin size={24} />
-            </a>
+            
           </div>
           <motion.button
             className={`mt-6 px-6 py-3 cursor-pointer rounded-full font-semibold text-lg transition-transform transform hover:scale-105 shadow-lg ${buttonColor}`}
