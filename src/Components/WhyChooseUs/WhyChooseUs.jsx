@@ -10,85 +10,70 @@ import {
   FaHeart,
   FaGlobe,
   FaSmile,
+  FaTimes
 } from 'react-icons/fa';
 
-const ContactModal = ({ isOpen, onClose, isDarkMode }) => {
-  if (!isOpen) return null;
-
-  const modalBackgroundColor = isDarkMode ? 'bg-gray-800' : 'bg-white';
-  const modalTextColor = isDarkMode ? 'text-gray-200' : 'text-gray-600';
-
-  return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-      <div className={`${modalBackgroundColor} p-8 rounded-lg shadow-lg w-full max-w-md`}>
-        <h2 className={`text-2xl font-bold mb-6 ${modalTextColor}`}>Get in Touch</h2>
-        <form>
-          <div className="mb-4">
-            <label className={`block text-sm font-medium mb-2 ${modalTextColor}`} htmlFor="name">
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              className={`w-full px-4 py-2 rounded-lg ${
-                isDarkMode ? 'bg-gray-700 text-white' : 'bg-gray-100 text-gray-900'
-              }`}
-              placeholder="Enter your name"
-            />
-          </div>
-          <div className="mb-4">
-            <label className={`block text-sm font-medium mb-2 ${modalTextColor}`} htmlFor="email">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              className={`w-full px-4 py-2 rounded-lg ${
-                isDarkMode ? 'bg-gray-700 text-white' : 'bg-gray-100 text-gray-900'
-              }`}
-              placeholder="Enter your email"
-            />
-          </div>
-          <div className="mb-6">
-            <label className={`block text-sm font-medium mb-2 ${modalTextColor}`} htmlFor="message">
-              Message
-            </label>
-            <textarea
-              id="message"
-              className={`w-full px-4 py-2 rounded-lg ${
-                isDarkMode ? 'bg-gray-700 text-white' : 'bg-gray-100 text-gray-900'
-              }`}
-              placeholder="Enter your message"
-              rows="4"
-            ></textarea>
-          </div>
-          <div className="flex justify-between">
-            <button
-              type="button"
-              onClick={onClose}
-              className="bg-gray-500 text-white px-6 py-2 rounded-lg hover:bg-gray-600 transition-colors duration-300"
-            >
-              Close
-            </button>
-            <a
-              href="tel:0741238738"
-              className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition-colors duration-300"
-            >
-              Call Now
-            </a>
-          </div>
-        </form>
-      </div>
-    </div>
-  );
-};
-
 const WhyChooseUs = () => {
+
+  const modalVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+    exit: { opacity: 0 },
+  };
+
+  const modalContentVariants = {
+    hidden: { y: -50, opacity: 0 },
+    visible: { y: 0, opacity: 1 },
+    exit: { y: -50, opacity: 0 },
+  };
+
+
+
+ const [result, setResult] = useState("");
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    setResult("Sending...");
+    
+    try {
+      const formData = new FormData(event.target);
+      formData.append("access_key", "6d349fce-d9fd-4aa2-a71c-7bf254b3cad0");
+  
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+  
+      const data = await response.json();
+  
+      if (data.success) {
+        setResult("Message submitted successfully! We'll contact you soon.");
+        event.target.reset();
+      } else {
+        console.error("Submission error:", data);
+        setResult(data.message || "Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+      setResult("Network error. Please check your connection.");
+    }
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { type: "spring", stiffness: 120 },
+    },
+  };
+
+
+
   const [isDarkMode, setIsDarkMode] = useState(
     document.documentElement.classList.contains('dark-mode')
   );
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   // Observe changes to the dark-mode class
   useEffect(() => {
     const observer = new MutationObserver(() => {
@@ -116,14 +101,6 @@ const WhyChooseUs = () => {
     },
   };
 
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { type: 'spring', stiffness: 120 },
-    },
-  };
 
   // Dynamic styles based on dark mode
   const backgroundColor = isDarkMode
@@ -278,21 +255,104 @@ const WhyChooseUs = () => {
           <p className={`text-lg mb-8 ${cardTextColor}`}>
             Let’s work together to create something extraordinary. Contact us today!
           </p>
-          <button
+          <motion.button
             className="bg-blue-600 cursor-pointer text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300"
             onClick={() => setIsModalOpen(true)}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            variants={itemVariants}
           >
             Get in Touch
-          </button>
+          </motion.button>
         </motion.div>
-      </div>
 
-      {/* Contact Modal */}
-      <ContactModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        isDarkMode={isDarkMode}
-      />
+ {/* Modal */}
+        {isModalOpen && (
+          <motion.div
+            className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={modalVariants}
+          >
+            <motion.div
+              className={`${cardBackgroundColor} rounded-lg p-8 w-full max-w-md relative`}
+              variants={modalContentVariants}
+            >
+              <motion.button
+                onClick={() => setIsModalOpen(false)}
+                className="absolute cursor-pointer top-4 right-4 text-gray-500 hover:text-gray-700"
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <FaTimes className="text-2xl" />
+              </motion.button>
+              <h2 className={`text-2xl font-bold mb-6 ${textColor}`}>
+                Get In Touch
+              </h2>
+              <form onSubmit={onSubmit}>
+  <motion.div className="mb-4" variants={itemVariants}>
+    <label className={`block text-sm font-medium mb-2 ${textColor}`}>
+      Name
+    </label>
+    <input
+      type="text"
+      name="name"
+      required
+      className={`w-full p-2 rounded-lg ${cardBackgroundColor} border ${cardTextColor}`}
+      placeholder="Enter your name"
+    />
+  </motion.div>
+  
+  <motion.div className="mb-4" variants={itemVariants}>
+    <label className={`block text-sm font-medium mb-2 ${textColor}`}>
+      Email
+    </label>
+    <input
+      type="email"
+      name="email"
+      required
+      className={`w-full p-2 rounded-lg ${cardBackgroundColor} border ${cardTextColor}`}
+      placeholder="Enter your email"
+    />
+  </motion.div>
+  
+  <motion.div className="mb-6" variants={itemVariants}>
+    <label className={`block text-sm font-medium mb-2 ${textColor}`}>
+      Message
+    </label>
+    <textarea
+      name="message"
+      className={`w-full p-2 rounded-lg ${cardBackgroundColor} border ${cardTextColor}`}
+      rows="4"
+      placeholder="Describe your requirements"
+      required
+    ></textarea>
+  </motion.div>
+
+  {result && (
+    <p className={`mb-4 text-center ${
+      isDarkMode ? "text-blue-300" : "text-blue-600"
+    }`}>
+      {result}
+    </p>
+  )}
+
+  <motion.button
+    type="submit"
+    className="bg-blue-600 cursor-pointer text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors duration-300"
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+  >
+    Submit
+  </motion.button>
+</form>
+ </motion.div>
+          </motion.div>
+        )}
+
+
+      </div>
     </motion.div>
   );
 };
